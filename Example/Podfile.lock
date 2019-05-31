@@ -1,0 +1,27 @@
+PODS:
+  - Expecta (1.0.6)
+  - GLInterop (0.1.0)
+  - Specta (1.0.7)
+
+DEPENDENCIES:
+  - Expecta
+  - GLInterop (from `../`)
+  - Specta
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Expecta
+    - Specta
+
+EXTERNAL SOURCES:
+  GLInterop:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
+  GLInterop: 222c89f16af3f24500e118d63249770f461a2651
+  Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
+
+PODFILE CHECKSUM: 60cc145de6436d296cbe643aa86af71fa21acd7b
+
+COCOAPODS: 1.6.1
