@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E41B7660389EC701321C36B /* Pods_GLInterop_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E71136DB2FFEFAFED165A4CB /* Pods_GLInterop_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -20,9 +19,10 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6AD00E469256920E33B8777E /* Pods_GLInterop_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C107EF2266EDB719A09C5C /* Pods_GLInterop_Example.framework */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
+		78527A925A514A0B232541FA /* libPods-GLInterop_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B773E24ACB3CE2D424EDBAC4 /* libPods-GLInterop_Example.a */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		89A8E14BACB030FB44B0C91E /* libPods-GLInterop_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A39398FBC85F9E5EB6114228 /* libPods-GLInterop_Tests.a */; };
 		DD399A3D22A1226A0010C534 /* GLIContextSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD399A3122A11E070010C534 /* GLIContextSpec.m */; };
 		DD399A3E22A1226E0010C534 /* GLIRenderTargetSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD399A3322A11E1A0010C534 /* GLIRenderTargetSpec.m */; };
 		DD399A3F22A122710010C534 /* GLIPixelBufferPoolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD399A3522A11E300010C534 /* GLIPixelBufferPoolSpec.m */; };
@@ -66,6 +66,8 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A39398FBC85F9E5EB6114228 /* libPods-GLInterop_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GLInterop_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B773E24ACB3CE2D424EDBAC4 /* libPods-GLInterop_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GLInterop_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C612AA2757715BAFFDB463D3 /* Pods-GLInterop_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GLInterop_Tests.debug.xcconfig"; path = "Target Support Files/Pods-GLInterop_Tests/Pods-GLInterop_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C9E26BE8C1B86C6BD0AAA1FB /* Pods-GLInterop_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GLInterop_Example.debug.xcconfig"; path = "Target Support Files/Pods-GLInterop_Example/Pods-GLInterop_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DD399A3122A11E070010C534 /* GLIContextSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLIContextSpec.m; sourceTree = "<group>"; };
@@ -73,8 +75,6 @@
 		DD399A3522A11E300010C534 /* GLIPixelBufferPoolSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLIPixelBufferPoolSpec.m; sourceTree = "<group>"; };
 		DD399A3722A11E450010C534 /* GLITextureCacheSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLITextureCacheSpec.m; sourceTree = "<group>"; };
 		DD399A4222A131AC0010C534 /* USC-SIPI.4.2.07.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "USC-SIPI.4.2.07.tiff"; sourceTree = "<group>"; };
-		E71136DB2FFEFAFED165A4CB /* Pods_GLInterop_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GLInterop_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9C107EF2266EDB719A09C5C /* Pods_GLInterop_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GLInterop_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				6AD00E469256920E33B8777E /* Pods_GLInterop_Example.framework in Frameworks */,
+				78527A925A514A0B232541FA /* libPods-GLInterop_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +96,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				1E41B7660389EC701321C36B /* Pods_GLInterop_Tests.framework in Frameworks */,
+				89A8E14BACB030FB44B0C91E /* libPods-GLInterop_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,8 +131,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				E9C107EF2266EDB719A09C5C /* Pods_GLInterop_Example.framework */,
-				E71136DB2FFEFAFED165A4CB /* Pods_GLInterop_Tests.framework */,
+				B773E24ACB3CE2D424EDBAC4 /* libPods-GLInterop_Example.a */,
+				A39398FBC85F9E5EB6114228 /* libPods-GLInterop_Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -227,7 +227,6 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				6E580F976A74C84CBA9E1C92 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -246,7 +245,6 @@
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				C2A8B3D7401B04AB2B87B33A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -344,28 +342,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6E580F976A74C84CBA9E1C92 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GLInterop_Example/Pods-GLInterop_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GLInterop/GLInterop.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GLInterop.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GLInterop_Example/Pods-GLInterop_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		81986B1CC137C56CF39C1164 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -386,30 +362,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C2A8B3D7401B04AB2B87B33A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GLInterop_Tests/Pods-GLInterop_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Expecta/Expecta.framework",
-				"${BUILT_PRODUCTS_DIR}/Specta/Specta.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Expecta.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Specta.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GLInterop_Tests/Pods-GLInterop_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
