@@ -2,7 +2,7 @@
 //  GLIContextSpec.m
 //  GLInterop_Example
 //
-//  Created by qinhong on 5/31/19.
+//  Created by Qin Hong on 5/31/19.
 //  Copyright © 2019 Qin Hong. All rights reserved.
 //
 

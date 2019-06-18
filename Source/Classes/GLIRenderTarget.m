@@ -35,9 +35,9 @@
         _textureCache = [GLITextureCache sharedTextureCache];
         _cvPixelBuffer = (__bridge_transfer id)pixelBuffer;
 
-        NSUInteger width = CVPixelBufferGetWidth(pixelBuffer);
-        NSUInteger height = CVPixelBufferGetHeight(pixelBuffer);
-        _cvTexture = (__bridge_transfer id)[_textureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:width height:height planeIndex:0];
+        _width = CVPixelBufferGetWidth(pixelBuffer);
+        _height = CVPixelBufferGetHeight(pixelBuffer);
+        _cvTexture = (__bridge_transfer id)[_textureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:_width height:_height planeIndex:0];
         if (!_cvTexture) return nil;
         _glTexture = CVOpenGLESTextureGetName((__bridge CVOpenGLESTextureRef)_cvTexture);;
 
@@ -49,23 +49,23 @@
 {
     if (self = [super init])
     {
-        NSUInteger width = size.width;
-        NSUInteger height = size.height;
-        NSAssert(width > 0 && height > 0, @"Invalid render target size.");
-        if (!(width > 0 && height > 0)) return nil;
+        _width = size.width;
+        _height = size.height;
+        NSAssert(_width > 0 && _height > 0, @"Invalid render target size.");
+        if (!(_width > 0 && _height > 0)) return nil;
         
         CVPixelBufferRef pixelBuffer = NULL;
         NSDictionary *pixelBufferAttributes = @{
             (__bridge NSString*)kCVPixelBufferOpenGLCompatibilityKey : @YES,
             (__bridge NSString*)kCVPixelBufferMetalCompatibilityKey : @(YES),
         };
-        CVPixelBufferCreate(kCFAllocatorDefault, width, height, kCVPixelFormatType_32BGRA, (__bridge CFDictionaryRef _Nullable)(pixelBufferAttributes), &pixelBuffer);
+        CVPixelBufferCreate(kCFAllocatorDefault, _width, _height, kCVPixelFormatType_32BGRA, (__bridge CFDictionaryRef _Nullable)(pixelBufferAttributes), &pixelBuffer);
         if (!pixelBuffer) return nil;
         
         _textureCache = [GLITextureCache sharedTextureCache];
         _cvPixelBuffer = (__bridge_transfer id)pixelBuffer;
 
-        _cvTexture = (__bridge_transfer id)[_textureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:width height:height planeIndex:0];
+        _cvTexture = (__bridge_transfer id)[_textureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:_width height:_height planeIndex:0];
         if (!_cvTexture) return nil;
         _glTexture = CVOpenGLESTextureGetName((__bridge CVOpenGLESTextureRef)_cvTexture);;
     }
