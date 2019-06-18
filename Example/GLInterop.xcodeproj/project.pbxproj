@@ -22,12 +22,15 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		78527A925A514A0B232541FA /* libPods-GLInterop_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B773E24ACB3CE2D424EDBAC4 /* libPods-GLInterop_Example.a */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		89A8E14BACB030FB44B0C91E /* libPods-GLInterop_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A39398FBC85F9E5EB6114228 /* libPods-GLInterop_Tests.a */; };
+		DD35550622B9C5650078EA8D /* GLIRendererSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD35550522B9C5650078EA8D /* GLIRendererSpec.m */; };
+		DD35550A22BA47BC0078EA8D /* libPods-GLInterop_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A39398FBC85F9E5EB6114228 /* libPods-GLInterop_Tests.a */; };
+		DD35550D22BB2EDE0078EA8D /* USC-SIPI.4.2.07.tiff in Resources */ = {isa = PBXBuildFile; fileRef = DD399A4222A131AC0010C534 /* USC-SIPI.4.2.07.tiff */; };
 		DD399A3D22A1226A0010C534 /* GLIContextSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD399A3122A11E070010C534 /* GLIContextSpec.m */; };
 		DD399A3E22A1226E0010C534 /* GLIRenderTargetSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD399A3322A11E1A0010C534 /* GLIRenderTargetSpec.m */; };
 		DD399A3F22A122710010C534 /* GLIPixelBufferPoolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD399A3522A11E300010C534 /* GLIPixelBufferPoolSpec.m */; };
 		DD399A4022A122750010C534 /* GLITextureCacheSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD399A3722A11E450010C534 /* GLITextureCacheSpec.m */; };
 		DD399A4322A131AC0010C534 /* USC-SIPI.4.2.07.tiff in Resources */ = {isa = PBXBuildFile; fileRef = DD399A4222A131AC0010C534 /* USC-SIPI.4.2.07.tiff */; };
+		DDE89E8222C20D0700E63AF3 /* GLITransformSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE89E8122C20D0700E63AF3 /* GLITransformSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,16 +68,20 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		773B6368E91AD138DB7DABDE /* Pods-GLInterop_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GLInterop_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-GLInterop_Example/Pods-GLInterop_Example.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A39398FBC85F9E5EB6114228 /* libPods-GLInterop_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GLInterop_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B506F5726A0EC325B595CE05 /* Pods-GLInterop_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GLInterop_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GLInterop_Tests/Pods-GLInterop_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B773E24ACB3CE2D424EDBAC4 /* libPods-GLInterop_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GLInterop_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C612AA2757715BAFFDB463D3 /* Pods-GLInterop_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GLInterop_Tests.debug.xcconfig"; path = "Target Support Files/Pods-GLInterop_Tests/Pods-GLInterop_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C9E26BE8C1B86C6BD0AAA1FB /* Pods-GLInterop_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GLInterop_Example.debug.xcconfig"; path = "Target Support Files/Pods-GLInterop_Example/Pods-GLInterop_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		DD35550522B9C5650078EA8D /* GLIRendererSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLIRendererSpec.m; sourceTree = "<group>"; };
 		DD399A3122A11E070010C534 /* GLIContextSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLIContextSpec.m; sourceTree = "<group>"; };
 		DD399A3322A11E1A0010C534 /* GLIRenderTargetSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLIRenderTargetSpec.m; sourceTree = "<group>"; };
 		DD399A3522A11E300010C534 /* GLIPixelBufferPoolSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLIPixelBufferPoolSpec.m; sourceTree = "<group>"; };
 		DD399A3722A11E450010C534 /* GLITextureCacheSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLITextureCacheSpec.m; sourceTree = "<group>"; };
 		DD399A4222A131AC0010C534 /* USC-SIPI.4.2.07.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "USC-SIPI.4.2.07.tiff"; sourceTree = "<group>"; };
+		DDE89E8122C20D0700E63AF3 /* GLITransformSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLITransformSpec.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +103,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				89A8E14BACB030FB44B0C91E /* libPods-GLInterop_Tests.a in Frameworks */,
+				DD35550A22BA47BC0078EA8D /* libPods-GLInterop_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +179,8 @@
 				DD399A3322A11E1A0010C534 /* GLIRenderTargetSpec.m */,
 				DD399A3522A11E300010C534 /* GLIPixelBufferPoolSpec.m */,
 				DD399A3722A11E450010C534 /* GLITextureCacheSpec.m */,
+				DD35550522B9C5650078EA8D /* GLIRendererSpec.m */,
+				DDE89E8122C20D0700E63AF3 /* GLITransformSpec.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -204,6 +213,8 @@
 				14CC9C2AA4C5E33167C67649 /* Pods-GLInterop_Example.release.xcconfig */,
 				C612AA2757715BAFFDB463D3 /* Pods-GLInterop_Tests.debug.xcconfig */,
 				31B8E34F2666E0F84898770B /* Pods-GLInterop_Tests.release.xcconfig */,
+				773B6368E91AD138DB7DABDE /* Pods-GLInterop_Example.release.xcconfig */,
+				B506F5726A0EC325B595CE05 /* Pods-GLInterop_Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -267,11 +278,12 @@
 				ORGANIZATIONNAME = "Qin Hong";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = M5HPC5ZBYS;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = PL54F4LJG7;
+						ProvisioningStyle = Automatic;
 					};
 					6003F5AD195388D20070C39A = {
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = PL54F4LJG7;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 6003F589195388D20070C39A;
 					};
 				};
@@ -314,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				DD35550D22BB2EDE0078EA8D /* USC-SIPI.4.2.07.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +397,8 @@
 				DD399A4022A122750010C534 /* GLITextureCacheSpec.m in Sources */,
 				DD399A3E22A1226E0010C534 /* GLIRenderTargetSpec.m in Sources */,
 				DD399A3F22A122710010C534 /* GLIPixelBufferPoolSpec.m in Sources */,
+				DD35550622B9C5650078EA8D /* GLIRendererSpec.m in Sources */,
+				DDE89E8222C20D0700E63AF3 /* GLITransformSpec.m in Sources */,
 				DD399A3D22A1226A0010C534 /* GLIContextSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,16 +519,17 @@
 			baseConfigurationReference = C9E26BE8C1B86C6BD0AAA1FB /* Pods-GLInterop_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = M5HPC5ZBYS;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PL54F4LJG7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.51vv.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Applications for Demo - iOS Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -524,16 +540,17 @@
 			baseConfigurationReference = 14CC9C2AA4C5E33167C67649 /* Pods-GLInterop_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = M5HPC5ZBYS;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PL54F4LJG7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.51vv.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Applications for Demo - iOS Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -544,11 +561,11 @@
 			baseConfigurationReference = C612AA2757715BAFFDB463D3 /* Pods-GLInterop_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hong Qin (N78WYVXPLS)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PL54F4LJG7;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(SDKROOT)/Developer/Library/Framework",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
@@ -572,11 +589,11 @@
 			baseConfigurationReference = 31B8E34F2666E0F84898770B /* Pods-GLInterop_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hong Qin (N78WYVXPLS)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PL54F4LJG7;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(SDKROOT)/Developer/Library/Framework",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);

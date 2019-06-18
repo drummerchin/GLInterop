@@ -15,12 +15,22 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GLIRenderTarget : NSObject
 
 /*!
- @abstract Returns the GL texture.
+ @abstract The width of the render target.
+ */
+@property (nonatomic) NSUInteger width;
+
+/*!
+ @abstract The height of the render target.
+ */
+@property (nonatomic) NSUInteger height;
+
+/*!
+ @abstract The GL texture that represents the render target.
  */
 @property (nonatomic, readonly) GLuint glTexture;
 
 /*!
- @abstract Returns the pixel buffer object which stores the content of texture.
+ @abstract The pixel buffer that represents the render target.
  */
 @property (nonatomic, readonly) CVPixelBufferRef pixelBuffer;
 
