@@ -2,7 +2,7 @@
 //  GLIRendererSpec.m
 //  GLInterop_Tests
 //
-//  Created by qinhong on 6/19/19.
+//  Created by Qin Hong on 6/19/19.
 //  Copyright © 2019 Qin Hong. All rights reserved.
 //
 
