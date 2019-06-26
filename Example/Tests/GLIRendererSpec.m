@@ -45,7 +45,6 @@ describe(@"GLIRender", ^{
                 }
             );
 
-            
             GLIRenderer *renderer = [[GLIRenderer alloc] initWithVertex:@(GLIDefaultVertexString) fragment:@(GLIPassthroughFragmentString)];
             expect(renderer).notTo.beNil();
         });
