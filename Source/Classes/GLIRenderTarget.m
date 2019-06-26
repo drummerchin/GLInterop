@@ -39,7 +39,7 @@
         _height = CVPixelBufferGetHeight(pixelBuffer);
         _cvTexture = (__bridge_transfer id)[_textureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:_width height:_height planeIndex:0];
         if (!_cvTexture) return nil;
-        _glTexture = CVOpenGLESTextureGetName((__bridge CVOpenGLESTextureRef)_cvTexture);;
+        _glTexture = CVOpenGLESTextureGetName((__bridge CVOpenGLESTextureRef)_cvTexture);
 
     }
     return self;
