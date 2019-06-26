@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2019-06-26
+
 ### Added
 
 - Add `upload` method in *GLITexture*.
@@ -14,8 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fix crash that occurred when initialize GLIRenderer without shaders.
+- Fix typo for last version in CHANGELOG.md.
 
-## [0.1.0] - 2019-06-25
+## [1.0.0] - 2019-06-25
 
 ### Added
 
