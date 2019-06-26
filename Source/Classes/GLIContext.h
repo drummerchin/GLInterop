@@ -19,10 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-//- (void)lock;
-//- (int)tryLock;
-//- (void)unlock;
-
 @end
 
 NS_ASSUME_NONNULL_END
