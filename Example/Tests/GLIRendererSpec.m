@@ -18,8 +18,7 @@ SpecBegin(GLIRenderer)
 describe(@"GLIRender", ^{
     
     context(@"Initializing", ^{
-        it(@"can be initialized", ^{
-            
+        it(@"can be initialized with shaders", ^{
             [EAGLContext setCurrentContext:[GLIContext sharedContext].glContext];
             
             const char * GLIDefaultVertexString = GLI_SHADER(
@@ -50,6 +49,19 @@ describe(@"GLIRender", ^{
         });
     });
     
+    it(@"can be initialized without shaders", ^{
+        [EAGLContext setCurrentContext:[GLIContext sharedContext].glContext];
+        
+        GLIRenderTarget *output = [[GLIRenderTarget alloc] initWithSize:CGSizeMake(100, 200)];
+        GLIRenderer *renderer = [[GLIRenderer alloc] initWithVertex:nil fragment:nil];
+        renderer.clearColor = [UIColor greenColor];
+        renderer.output = output;
+        [renderer render];
+        [renderer waitUntilCompleted];
+        CVPixelBufferRef outputPixelBuffer = output.pixelBuffer;
+        expect(renderer).notTo.beNil();
+    });
+
 });
 
 SpecEnd

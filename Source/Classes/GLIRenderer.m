@@ -154,6 +154,7 @@ struct GLIFramebuffer
 
 - (GLuint)program
 {
+    if (!_prog) return 0;
     return GLIProgramGetProgram(_prog);
 }
 
