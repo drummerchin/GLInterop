@@ -78,7 +78,7 @@ GLuint GLIShaderCreate(GLenum shaderType, const char * shaderStr)
         {
             GLchar *log = (GLchar *)calloc(1, logLength);
             glGetShaderInfoLog(shader, logLength, &logLength, log);
-            printf("%s shader compile log:\n%s", shaderType==GL_VERTEX_SHADER? "Vertex":"Fragment", log);
+            //printf("%s shader compile log:\n%s", shaderType==GL_VERTEX_SHADER? "Vertex":"Fragment", log);
             free(log);
         }
     }
@@ -190,7 +190,7 @@ void GLIProgramParseVertexAttrib(GLIProgramRef p)
             glGetActiveAttrib(p->prog, i, length, NULL, &vertexAttrib.size, &vertexAttrib.type, vertexAttrib.name);
             vertexAttrib.index = glGetAttribLocation(p->prog, vertexAttrib.name);
             p->vertexAttribs[i] = vertexAttrib;
-            printf("[vertex attribute] index: %d, name: %s, size: %d, type: %x\n", vertexAttrib.index, vertexAttrib.name, vertexAttrib.size, vertexAttrib.type);
+            //printf("[vertex attribute] index: %d, name: %s, size: %d, type: %x\n", vertexAttrib.index, vertexAttrib.name, vertexAttrib.size, vertexAttrib.type);
         }
         p->vertexAttribCount = activeAttributes;
     }
