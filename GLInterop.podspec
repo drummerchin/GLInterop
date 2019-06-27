@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GLInterop'
-  s.version          = '1.1.0'
+  s.version          = '1.2.0'
   s.summary          = 'A library of GL interoperable texture.'
   s.description      = <<-DESC
 A library that supports interoperable render target between GL texture and CVPixelBufferRef.
@@ -24,6 +24,6 @@ A library that supports interoperable render target between GL texture and CVPix
   s.source_files = 'Source/Classes/**/*'
   s.private_header_files = 'Source/Classes/Private/**/*.h'
   s.requires_arc = 'Source/Classes/**/*{.m,.mm}'
-  s.frameworks = 'Foundation', 'UIKit', 'OpenGLES', 'CoreVideo', 'CoreGraphics'
+  s.frameworks = 'Foundation', 'UIKit', 'OpenGLES', 'CoreVideo', 'CoreGraphics', 'Metal'
   
 end
