@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  @property output
  @abstract The output of the rendering.
  */
-@property (nonatomic) GLIRenderTarget *output;
+@property (nonatomic) __kindof GLIRenderTarget *output;
 
 /*!
  @method    initWithVertex:fragment:

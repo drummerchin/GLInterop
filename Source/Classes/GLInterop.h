@@ -11,5 +11,6 @@
 #import "GLIPixelBufferPool.h"
 #import "GLITextureCache.h"
 #import "GLIRenderTarget.h"
+#import "GLIMetalRenderTarget.h"
 #import "GLIRenderer.h"
 #import "GLITransform.h"

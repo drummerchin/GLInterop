@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @abstract The pixel buffer that represents the render target.
  */
-@property (nonatomic, readonly) CVPixelBufferRef pixelBuffer;
+@property (nonatomic, readonly) CVPixelBufferRef pixelBuffer CV_RETURNS_RETAINED_PARAMETER;
 
 /*!
  @method initWithWithCVPixelBuffer:
