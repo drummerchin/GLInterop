@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2019-06-27
+
 ## Changed
 
 - Change the type of `output` from `GLIRenderTarget *` to `__kindof GLIRenderTarget *` in *GLIRenderer* to compatible with *GLIMetalRenderTarget*.
