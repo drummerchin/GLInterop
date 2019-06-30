@@ -54,12 +54,14 @@ describe(@"GLIRender", ^{
         
         GLIRenderTarget *output = [[GLIRenderTarget alloc] initWithSize:CGSizeMake(100, 200)];
         GLIRenderer *renderer = [[GLIRenderer alloc] initWithVertex:nil fragment:nil];
+        expect(renderer).notTo.beNil();
         renderer.clearColor = [UIColor greenColor];
         renderer.output = output;
         [renderer render];
         [renderer waitUntilCompleted];
-        CVPixelBufferRef outputPixelBuffer = output.pixelBuffer;
-        expect(renderer).notTo.beNil();
+
+        expect(output.pixelBuffer).notTo.beNil();
+        expect(output.glTexture).to.beGreaterThan(0);
     });
 
 });

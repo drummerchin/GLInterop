@@ -8,11 +8,12 @@
 #import "GLIRenderTarget.h"
 #import "GLIPixelBufferPool.h"
 #import "GLITextureCache.h"
+#import "GLIContext.h"
 #import <OpenGLES/ES2/glext.h>
 
 @interface GLIRenderTarget ()
 {
-    GLITextureCache *_textureCache;
+    GLITextureCache *_glTextureCache;
     id _cvPixelBuffer;
     id _cvTexture;
 }
@@ -24,20 +25,23 @@
 
 #pragma mark - life cycle
 
-- (instancetype)initWithWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer
+- (instancetype)initWithWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer glTextureCache:(nonnull GLITextureCache *)textureCache
 {
     if (self = [super init])
     {
-        if (!pixelBuffer) return nil;
+        NSParameterAssert(pixelBuffer);
+        NSParameterAssert(textureCache);
+        if (!pixelBuffer || !textureCache) return nil;
+        
         NSUInteger planeCount = CVPixelBufferGetPlaneCount(pixelBuffer);
         if (planeCount > 1) return nil;
-
-        _textureCache = [GLITextureCache sharedTextureCache];
+        
+        _glTextureCache = textureCache;
         _cvPixelBuffer = (__bridge_transfer id)pixelBuffer;
 
         _width = CVPixelBufferGetWidth(pixelBuffer);
         _height = CVPixelBufferGetHeight(pixelBuffer);
-        _cvTexture = (__bridge_transfer id)[_textureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:_width height:_height planeIndex:0];
+        _cvTexture = (__bridge_transfer id)[_glTextureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:_width height:_height planeIndex:0];
         if (_cvTexture)
         {
             _glTexture = CVOpenGLESTextureGetName((__bridge CVOpenGLESTextureRef)_cvTexture);
@@ -46,10 +50,18 @@
     return self;
 }
 
-- (instancetype)initWithSize:(CGSize)size
+- (instancetype)initWithWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer
+{
+    return [self initWithWithCVPixelBuffer:pixelBuffer glTextureCache:[GLITextureCache sharedTextureCache]];
+}
+
+- (instancetype)initWithSize:(CGSize)size glTextureCache:(nonnull GLITextureCache *)textureCache
 {
     if (self = [super init])
     {
+        NSParameterAssert(textureCache);
+        if (!textureCache) return nil;
+        
         _width = size.width;
         _height = size.height;
         NSAssert(_width > 0 && _height > 0, @"Invalid render target size.");
@@ -57,29 +69,30 @@
         
         CVPixelBufferRef pixelBuffer = NULL;
         NSDictionary *pixelBufferAttributes = @{
-            (__bridge NSString*)kCVPixelBufferOpenGLCompatibilityKey : @YES,
+            (__bridge NSString*)kCVPixelBufferOpenGLCompatibilityKey : @(YES),
             (__bridge NSString*)kCVPixelBufferMetalCompatibilityKey : @(YES),
         };
         CVPixelBufferCreate(kCFAllocatorDefault, _width, _height, kCVPixelFormatType_32BGRA, (__bridge CFDictionaryRef _Nullable)(pixelBufferAttributes), &pixelBuffer);
         if (!pixelBuffer) return nil;
         
-        _textureCache = [GLITextureCache sharedTextureCache];
+        _glTextureCache = textureCache;
         _cvPixelBuffer = (__bridge_transfer id)pixelBuffer;
 
-        _cvTexture = (__bridge_transfer id)[_textureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:_width height:_height planeIndex:0];
+        _cvTexture = (__bridge_transfer id)[_glTextureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:_width height:_height planeIndex:0];
         if (!_cvTexture) return nil;
         _glTexture = CVOpenGLESTextureGetName((__bridge CVOpenGLESTextureRef)_cvTexture);;
     }
     return self;
 }
 
+- (instancetype)initWithSize:(CGSize)size
+{
+    return [self initWithSize:size glTextureCache:[GLITextureCache sharedTextureCache]];
+}
+
 - (CVPixelBufferRef)pixelBuffer
 {
     return (__bridge CVPixelBufferRef)_cvPixelBuffer;
 }
-
-#pragma mark - Metal Texture Support
-
-
 
 @end

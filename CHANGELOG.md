@@ -7,13 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `initWithWithCVPixelBuffer:glTextureCache:` and `initWithSize:glTextureCache:` in *GLIRenderTarget*.
+- Add `glTextureCache` in *GLIRenderTarget*.
+- Add `initWithWithCVPixelBuffer:glTextureCache:mtlTextureCache:` and `initWithSize:glTextureCache:mtlTextureCache:` in *GLIMetalRenderTarget*.
+- Add `mtlTextureCache` in *GLIMetalRenderTarget*.
+
 ## [1.2.0] - 2019-06-27
 
-## Changed
+### Changed
 
 - Change the type of `output` from `GLIRenderTarget *` to `__kindof GLIRenderTarget *` in *GLIRenderer* to compatible with *GLIMetalRenderTarget*.
 
-## Added
+### Added
 
 - Add *GLIMetalRenderTarget*.
 - Add *GLIMetalTextureCache*.

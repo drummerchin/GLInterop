@@ -214,7 +214,7 @@ void GLIProgramParseUniform(GLIProgramRef p)
             //uniform.name
             uniform.location = glGetUniformLocation(p->prog, uniform.name);
             p->uniforms[i] = uniform;
-            printf("[uniform] location: %d, name: %s, size: %d, type: %x\n", uniform.location, uniform.name, uniform.size, uniform.type);
+            //printf("[uniform] location: %d, name: %s, size: %d, type: %x\n", uniform.location, uniform.name, uniform.size, uniform.type);
 
         }
         p->uniformCount = activeUniforms;

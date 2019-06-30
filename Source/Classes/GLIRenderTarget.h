@@ -13,6 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GLITextureCache;
+
 @interface GLIRenderTarget : NSObject
 
 /*!
@@ -36,16 +38,33 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) CVPixelBufferRef pixelBuffer CV_RETURNS_RETAINED_PARAMETER;
 
 /*!
- @method initWithWithCVPixelBuffer:
- @abstract Initialize instance from a given pixel buffer.
+ @abstract The GL texture cache that the render target used.
  */
-- (instancetype)initWithWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer NS_DESIGNATED_INITIALIZER;
+@property (nonatomic, strong, readonly) GLITextureCache *glTextureCache;
+
+/*!
+ @method initWithWithCVPixelBuffer:glTextureCache:
+ @abstract Initialize instance from a given pixel buffer and a given GLITextureCache.
+ */
+- (instancetype)initWithWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer glTextureCache:(GLITextureCache *)textureCache NS_DESIGNATED_INITIALIZER;
+
+/*!
+ @method initWithWithCVPixelBuffer:
+ @abstract Initialize instance from a given pixel buffer and a shared GLITextureCache.
+ */
+- (instancetype)initWithWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer;
+
+/*!
+ @method initWithSize:glTextureCache:
+ @abstract Initialize instance from a given size and a given GLITextureCache.
+ */
+- (instancetype)initWithSize:(CGSize)size glTextureCache:(GLITextureCache *)textureCache NS_DESIGNATED_INITIALIZER;
 
 /*!
  @method initWithSize:
- @abstract Initialize instance with a given size.
+ @abstract Initialize instance from a given size a shared GLITextureCache.
  */
-- (instancetype)initWithSize:(CGSize)size NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithSize:(CGSize)size;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
