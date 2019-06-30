@@ -292,11 +292,12 @@
 				ORGANIZATIONNAME = "Qin Hong";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = M5HPC5ZBYS;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = PL54F4LJG7;
+						ProvisioningStyle = Automatic;
 					};
 					6003F5AD195388D20070C39A = {
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = PL54F4LJG7;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 6003F589195388D20070C39A;
 					};
 				};
@@ -539,16 +540,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = M5HPC5ZBYS;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PL54F4LJG7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.51vv.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Applications for Demo - iOS Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -560,16 +561,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = M5HPC5ZBYS;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PL54F4LJG7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.51vv.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Applications for Demo - iOS Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -580,9 +581,9 @@
 			baseConfigurationReference = C612AA2757715BAFFDB463D3 /* Pods-GLInterop_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hong Qin (N78WYVXPLS)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PL54F4LJG7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Framework",
 					"$(inherited)",
@@ -608,9 +609,9 @@
 			baseConfigurationReference = 31B8E34F2666E0F84898770B /* Pods-GLInterop_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hong Qin (N78WYVXPLS)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PL54F4LJG7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Framework",
 					"$(inherited)",
