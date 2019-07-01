@@ -63,21 +63,25 @@ typedef enum : NSUInteger {
 
 /*!
  @abstract Default is GLIMinFilter_Linear.
+ @discussion To avoid performance loss, the value is not from param query of texture.
  */
 @property (nonatomic) GLIMinFilter minFilter;
 
 /*!
  @abstract Default is GLIMinFilter_Linear.
+ @discussion To avoid performance loss, the value is not from param query of texture.
  */
 @property (nonatomic) GLIMagFilter magFilter;
 
 /*!
  @abstract Default is GLIAddressMode_ClampToEdge.
+ @discussion To avoid performance loss, the value is not from param query of texture.
  */
 @property (nonatomic) GLIAddressMode wrapS;
 
 /*!
  @abstract Default is GLIAddressMode_ClampToEdge.
+ @discussion To avoid performance loss, the value is not from param query of texture.
  */
 @property (nonatomic) GLIAddressMode wrapT;
 
@@ -87,7 +91,13 @@ typedef enum : NSUInteger {
  @method        upload
  @abstract      Upload texture to GPU with the given min/mag filter and adress mode.
  */
-- (void)upload;
+- (void)upload __attribute__((deprecated("Use 'setTextureParameters' instead.")));
+
+/*!
+ @method        setTextureParameters
+ @abstract      Set texture parameters using minFilter, magFilter, wrapS and wrapT.
+ */
+- (void)setTextureParameters;
 
 @end
 

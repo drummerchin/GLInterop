@@ -7,12 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2019-07-01
+
 ### Added
 
 - Add `initWithWithCVPixelBuffer:glTextureCache:` and `initWithSize:glTextureCache:` in *GLIRenderTarget*.
 - Add `glTextureCache` in *GLIRenderTarget*.
 - Add `initWithWithCVPixelBuffer:glTextureCache:mtlTextureCache:` and `initWithSize:glTextureCache:mtlTextureCache:` in *GLIMetalRenderTarget*.
 - Add `mtlTextureCache` in *GLIMetalRenderTarget*.
+- Add `setTextureParameters` in *GLITexture*.
+
+### Deprecated
+
+- Deprecate `upload` in *GLITexture* for incorrect API naming reason.
 
 ## [1.2.0] - 2019-06-27
 
