@@ -69,8 +69,6 @@ struct GLIFramebuffer
             
             GLIProgramParseVertexAttrib(_prog);
             GLIProgramParseUniform(_prog);
-
-            
         }
         
         _framebuffer.target = GL_FRAMEBUFFER;

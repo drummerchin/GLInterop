@@ -65,4 +65,14 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
     glBindTexture(_target, 0);
 }
 
+- (void)setTextureParameters
+{
+    glBindTexture(_target, _name);
+    glTexParameteri(_target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(_minFilter));
+    glTexParameteri(_target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(_magFilter));
+    glTexParameteri(_target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(_wrapS));
+    glTexParameteri(_target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(_wrapT));
+    glBindTexture(_target, 0);
+}
+
 @end

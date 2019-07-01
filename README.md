@@ -5,14 +5,17 @@
 [![License](https://img.shields.io/cocoapods/l/GLInterop.svg?style=flat)](https://cocoapods.org/pods/GLInterop)
 [![Platform](https://img.shields.io/cocoapods/p/GLInterop.svg?style=flat)](https://cocoapods.org/pods/GLInterop)
 
-*GLInterop* is a library that supports interoperable render target between GL texture and CVPixelBufferRef.
+*GLInterop* is a library that supports interoperable render target between GL texture, Metal texture and CVPixelBufferRef.
 
 ## Features
 
 - GLIContext
-- GLITextureCache
 - GLIPixelBufferPool
+- GLITextureCache
+- GLIMetalTextureCache
 - GLIRenderTarget
+- GLIMetalRenderTarget
+- GLIRenderer
 
 ## Example
 

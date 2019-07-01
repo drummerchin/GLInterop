@@ -48,9 +48,8 @@ describe(@"GLITransform", ^{
         [transform render];
         [transform waitUntilCompleted];
         
-        CVPixelBufferRef pixelBuffer = renderTarget.pixelBuffer;
         expect(renderTarget.glTexture).to.beGreaterThan(0);
-        expect(renderTarget.pixelBuffer).to.beTruthy();
+        expect(renderTarget.pixelBuffer).notTo.beNil();
     });
     
     it(@"can be render to a GLIMetalRenderTarget correctly", ^{
@@ -83,10 +82,9 @@ describe(@"GLITransform", ^{
         [transform render];
         [transform waitUntilCompleted];
         
-        CVPixelBufferRef pixelBuffer = renderTarget.pixelBuffer;
-        id<MTLTexture> mtlTexture = renderTarget.mtlTexture;
+        expect(renderTarget.pixelBuffer).notTo.beNil();
         expect(renderTarget.glTexture).to.beGreaterThan(0);
-        expect(renderTarget.pixelBuffer).to.beTruthy();
+        expect(renderTarget.mtlTexture).notTo.beNil();
     });
     
 });
