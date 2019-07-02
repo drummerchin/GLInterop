@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 2019-07-02
+
+### Fixed
+
+- Fix issue that `glContext` property is always be nil in *GLITextureCache*.
+
 ## [1.3.0] - 2019-07-01
 
 ### Added
