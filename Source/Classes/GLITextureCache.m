@@ -19,6 +19,7 @@
 @end
 
 @implementation GLITextureCache
+@synthesize glContext = _context;
 
 - (void)dealloc
 {
