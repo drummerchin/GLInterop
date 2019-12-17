@@ -24,6 +24,10 @@
 - (void)dealloc
 {
     [self flush];
+    if (_glTextureCache)
+    {
+        CFRelease(_glTextureCache);
+    }
 }
 
 - (instancetype)initWithContext:(EAGLContext *)context
