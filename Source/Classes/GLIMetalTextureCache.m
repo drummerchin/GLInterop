@@ -31,6 +31,10 @@
 - (void)dealloc
 {
     [self flush];
+    if (_mtlTextureCache)
+    {
+        CFRelease(_mtlTextureCache);
+    }
 }
 
 - (instancetype)initWithDevice:(id<MTLDevice>)device

@@ -17,9 +17,14 @@ describe(@"GLIMetalTextureCache", ^{
     
     context(@"Initializing", ^{
         it(@"can be initialized with a device", ^{
-            id<MTLDevice> device = MTLCreateSystemDefaultDevice();
-            GLIMetalTextureCache *textureCache = [[GLIMetalTextureCache alloc] initWithDevice:device];
-            expect(textureCache).notTo.beNil();
+            __weak GLIMetalTextureCache *weakTextureCache = nil;
+            @autoreleasepool {
+                id<MTLDevice> device = MTLCreateSystemDefaultDevice();
+                GLIMetalTextureCache *textureCache = [[GLIMetalTextureCache alloc] initWithDevice:device];
+                expect(textureCache).notTo.beNil();
+                weakTextureCache = textureCache;
+            }
+            expect(weakTextureCache).to.beNil();
         });
         it(@"can be a singleton", ^{
             GLIMetalTextureCache *textureCache = [GLIMetalTextureCache sharedTextureCache];

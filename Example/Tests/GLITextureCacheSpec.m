@@ -24,9 +24,14 @@ describe(@"GLITextureCache", ^{
             expect(gl2TextureCache.glContext).to.equal(gl2Context);
 
             EAGLContext *gl3Context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-            GLITextureCache *gl3TextureCache = [[GLITextureCache alloc] initWithContext:gl3Context];
-            expect(gl3TextureCache).notTo.beNil();
-            expect(gl3TextureCache.glContext).to.equal(gl3Context);
+            __weak GLITextureCache *weakTextureCache = nil;
+            @autoreleasepool {
+                GLITextureCache *gl3TextureCache = [[GLITextureCache alloc] initWithContext:gl3Context];
+                expect(gl3TextureCache).notTo.beNil();
+                expect(gl3TextureCache.glContext).to.equal(gl3Context);
+                weakTextureCache = gl3TextureCache;
+            }
+            expect(weakTextureCache).to.beNil();
         });
         
         it(@"can be a singleton", ^{
