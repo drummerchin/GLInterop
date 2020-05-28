@@ -8,6 +8,7 @@
 #import "GLIContext.h"
 #import <pthread/pthread.h>
 #include <OpenGLES/ES2/gl.h>
+#import <UIKit/UIKit.h>
 
 @interface GLIContext ()
 {

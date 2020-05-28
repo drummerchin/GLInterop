@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <OpenGLES/gltypes.h>
+#import <UIKit/UIKit.h>
 #import "GLIRenderTarget.h"
 #import "GLITexture.h"
 

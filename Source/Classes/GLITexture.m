@@ -20,7 +20,7 @@ static const GLint glValueFromMinFilter(GLIMinFilter minFilter)
         case GLIMinFilter_LinearMipmapLinear: ret = GL_LINEAR_MIPMAP_LINEAR; break;
         default: break;
     }
-    return ret;
+    return (GLint)ret;
 }
 
 static const GLint glValueFromMagFilter(GLIMagFilter magFilter)
@@ -38,7 +38,7 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
         case GLIAddressMode_MirroredRepeat: ret = GL_MIRRORED_REPEAT; break;
         default: break;
     }
-    return ret;
+    return (GLint)ret;
 }
 
 @implementation GLITexture
