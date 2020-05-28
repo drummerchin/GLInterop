@@ -38,7 +38,7 @@ const char * GLITransformFragmentString = GLI_SHADER(
 {
     if (self = [super initWithVertex:@(GLITransformVertexString) fragment:@(GLITransformFragmentString)])
     {
-        
+        self.transform = CATransform3DIdentity;
     }
     return self;
 }
