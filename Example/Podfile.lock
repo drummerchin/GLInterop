@@ -9,7 +9,7 @@ DEPENDENCIES:
   - Specta
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Expecta
     - Specta
 
@@ -22,6 +22,6 @@ SPEC CHECKSUMS:
   GLInterop: e94b79409cf8963ba56f674cb9e4039ab6bae58e
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
-PODFILE CHECKSUM: c9f0810c395d0bd15c39c218fb901ef61c951ca0
+PODFILE CHECKSUM: 9a3d17de8ff534456243bc6fb9432a5dce157bae
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.9.1

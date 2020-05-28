@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.version          = '1.3.2'
   s.summary          = 'A library of GL interoperable texture.'
   s.description      = <<-DESC
-A library that supports interoperable render target between GL texture Metal texture and CVPixelBufferRef.
-                       DESC
+A library that supports interoperable render target between GL texture and CVPixelBufferRef and it also applies to Metal texture and CVPixelBufferRef.
+DESC
 
   s.homepage         = 'https://github.com/Qin Hong/GLInterop'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
