@@ -47,6 +47,8 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
 {
     if (self = [super init])
     {
+        _target = GL_TEXTURE_2D;
+        _name = 0;
         _minFilter = GLIMinFilter_Linear;
         _magFilter = GLIMagFilter_Linear;
         _wrapS = GLIAddressMode_ClampToEdge;
@@ -73,6 +75,14 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
     glTexParameteri(_target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(_wrapS));
     glTexParameteri(_target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(_wrapT));
     glBindTexture(_target, 0);
+}
+
+- (void)applyTextureParamters
+{
+    glTexParameteri(_target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(_minFilter));
+    glTexParameteri(_target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(_magFilter));
+    glTexParameteri(_target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(_wrapS));
+    glTexParameteri(_target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(_wrapT));
 }
 
 @end

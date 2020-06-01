@@ -99,6 +99,8 @@ typedef enum : NSUInteger {
  */
 - (void)setTextureParameters;
 
+- (void)applyTextureParamters;
+
 @end
 
 NS_ASSUME_NONNULL_END

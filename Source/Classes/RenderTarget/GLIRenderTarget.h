@@ -9,23 +9,13 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreVideo/CoreVideo.h>
 #import <OpenGLES/gltypes.h>
-#import <OpenGLES/EAGL.h>
+#import "GLIRenderTargetProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class GLITextureCache;
 
-@interface GLIRenderTarget : NSObject
-
-/*!
- @abstract The width of the render target.
- */
-@property (nonatomic) NSUInteger width;
-
-/*!
- @abstract The height of the render target.
- */
-@property (nonatomic) NSUInteger height;
+@interface GLIRenderTarget : NSObject <GLIRenderTarget>
 
 /*!
  @abstract The GL texture that represents the render target.

@@ -13,12 +13,15 @@
 @interface GLIMetalRenderTarget ()
 {
     id _cvTexture;
-    GLIMetalTextureCache *_mtlTextureCache;
 }
+
+@property (nonatomic, strong) id<MTLTexture> mtlTexture;
+@property (nonatomic, strong) GLIMetalTextureCache *mtlTextureCache;
 
 @end
 
 @implementation GLIMetalRenderTarget
+@synthesize mtlTexture;
 
 - (instancetype)initWithWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer glTextureCache:(nonnull GLITextureCache *)glTextureCache mtlTextureCache:(nonnull GLIMetalTextureCache *)mtlTextureCache
 {
@@ -27,13 +30,13 @@
         NSParameterAssert(mtlTextureCache);
         if (!mtlTextureCache) return nil;
         
-        _mtlTextureCache = mtlTextureCache;
-        _cvTexture = (__bridge_transfer id)[_mtlTextureCache createCVTextureFromImage:self.pixelBuffer
-                                                                          pixelFormat:MTLPixelFormatBGRA8Unorm
-                                                                                width:self.width
-                                                                               height:self.height
-                                                                           planeIndex:0];
-        _mtlTexture = CVMetalTextureGetTexture((__bridge CVMetalTextureRef)_cvTexture);
+        self.mtlTextureCache = mtlTextureCache;
+        _cvTexture = (__bridge_transfer id)[self.mtlTextureCache createCVTextureFromImage:self.pixelBuffer
+                                                                              pixelFormat:MTLPixelFormatBGRA8Unorm
+                                                                                    width:self.width
+                                                                                   height:self.height
+                                                                               planeIndex:0];
+        self.mtlTexture = CVMetalTextureGetTexture((__bridge CVMetalTextureRef)_cvTexture);
     }
     return self;
 }
@@ -55,13 +58,13 @@
         NSParameterAssert(mtlTextureCache);
         if (!mtlTextureCache) return nil;
         
-        _mtlTextureCache = mtlTextureCache;
-        _cvTexture = (__bridge_transfer id)[_mtlTextureCache createCVTextureFromImage:self.pixelBuffer
-                                                                          pixelFormat:MTLPixelFormatBGRA8Unorm
-                                                                                width:self.width
-                                                                               height:self.height
-                                                                           planeIndex:0];
-        _mtlTexture = CVMetalTextureGetTexture((__bridge CVMetalTextureRef)_cvTexture);
+        self.mtlTextureCache = mtlTextureCache;
+        _cvTexture = (__bridge_transfer id)[self.mtlTextureCache createCVTextureFromImage:self.pixelBuffer
+                                                                              pixelFormat:MTLPixelFormatBGRA8Unorm
+                                                                                    width:self.width
+                                                                                   height:self.height
+                                                                               planeIndex:0];
+        self.mtlTexture = CVMetalTextureGetTexture((__bridge CVMetalTextureRef)_cvTexture);
     }
     return self;
 }
