@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2020-06-02
+
 ### Changed
 
 - *GLIRenderer* now supports to define a property with prefix 'uniform_' to get or set a texture/float/int uniform.
