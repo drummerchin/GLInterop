@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2020-06-02
+
+### Changed
+
+- *GLIRenderer* now supports to define a property with prefix 'uniform_' to get or set a texture/float/int uniform.
+
+### Added
+
+- Add class *GLIFramebufferTextureRenderTarget* to support the render target which contains a GL texture and a framebuffer.
+- Add class *GLITextureRenderTarget* to support GL texture only render target.
+- Add `applyTextureParamters` in *GLITexture*.
+
+### Fixed
+
+- Fix default value of `transform` issue in *GLITransform*.
+
 ## [1.3.2] - 2019-12-17
 
 ### Fixed

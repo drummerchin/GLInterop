@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <OpenGLES/gltypes.h>
+#import <UIKit/UIKit.h>
 #import "GLIRenderTarget.h"
 #import "GLITexture.h"
 
@@ -14,6 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 // stringify shader source
 #define GLI_SHADER(shader) #shader
+
+struct GLIFramebuffer
+{
+    GLenum target; // GL_FRAMEBUFFER, GL_FRAMEBUFFER_EXT, etc.
+    GLuint name;
+};
 
 /*!
  @class     GLIRenderer
@@ -31,13 +38,13 @@ NS_ASSUME_NONNULL_BEGIN
  @property inputTextures
  @abstract The input textures to be processed. The element of the array conforms GLITexture protocol.
  */
-@property (nonatomic) NSArray<id<GLITexture>> *inputTextures;
+@property (nonatomic, nullable) NSArray<id<GLITexture>> *inputTextures;
 
 /*!
  @property output
  @abstract The output of the rendering.
  */
-@property (nonatomic) __kindof GLIRenderTarget *output;
+@property (nonatomic) id<GLIRenderTarget> output;
 
 /*!
  @method    initWithVertex:fragment:
@@ -66,9 +73,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface GLIRenderer (GLIRendererProtectedMethods)
+@interface GLIRenderer (GLIProtectedMethods)
 
-+ (NSString *)defaultVertexString;
+@property (nonatomic, strong, class, readonly) NSString *defaultVertexString;
+
 - (GLuint)program;
 - (BOOL)prepareFramebuffer;
 - (void)setViewPortWithContentMode:(UIViewContentMode)contentMode inputSize:(CGSize)inputSize;

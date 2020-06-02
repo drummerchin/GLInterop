@@ -36,6 +36,7 @@
 		DD399A3F22A122710010C534 /* GLIPixelBufferPoolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD399A3522A11E300010C534 /* GLIPixelBufferPoolSpec.m */; };
 		DD399A4022A122750010C534 /* GLITextureCacheSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DD399A3722A11E450010C534 /* GLITextureCacheSpec.m */; };
 		DD399A4322A131AC0010C534 /* USC-SIPI.4.2.07.tiff in Resources */ = {isa = PBXBuildFile; fileRef = DD399A4222A131AC0010C534 /* USC-SIPI.4.2.07.tiff */; };
+		DDC76651247F987E00E08593 /* renderquad.metal in Sources */ = {isa = PBXBuildFile; fileRef = DDC76650247F987E00E08593 /* renderquad.metal */; };
 		DDE89E8222C20D0700E63AF3 /* GLITransformSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE89E8122C20D0700E63AF3 /* GLITransformSpec.m */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		DD399A3522A11E300010C534 /* GLIPixelBufferPoolSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLIPixelBufferPoolSpec.m; sourceTree = "<group>"; };
 		DD399A3722A11E450010C534 /* GLITextureCacheSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLITextureCacheSpec.m; sourceTree = "<group>"; };
 		DD399A4222A131AC0010C534 /* USC-SIPI.4.2.07.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "USC-SIPI.4.2.07.tiff"; sourceTree = "<group>"; };
+		DDC76650247F987E00E08593 /* renderquad.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = renderquad.metal; sourceTree = "<group>"; };
 		DDE89E8122C20D0700E63AF3 /* GLITransformSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLITransformSpec.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +159,7 @@
 		6003F593195388D20070C39A /* Example for GLInterop */ = {
 			isa = PBXGroup;
 			children = (
+				DDC76650247F987E00E08593 /* renderquad.metal */,
 				DD399A4122A131AC0010C534 /* Assets */,
 				6003F59C195388D20070C39A /* GLIAppDelegate.h */,
 				6003F59D195388D20070C39A /* GLIAppDelegate.m */,
@@ -288,12 +291,12 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GLI;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Qin Hong";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = PL54F4LJG7;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = M5HPC5ZBYS;
+						ProvisioningStyle = Manual;
 					};
 					6003F5AD195388D20070C39A = {
 						DevelopmentTeam = PL54F4LJG7;
@@ -403,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* GLIAppDelegate.m in Sources */,
+				DDC76651247F987E00E08593 /* renderquad.metal in Sources */,
 				6003F5A7195388D20070C39A /* GLIViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
@@ -469,19 +473,32 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -509,18 +526,31 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -540,16 +570,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PL54F4LJG7;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = M5HPC5ZBYS;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MARKETING_VERSION = 1.4.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.51vv.GLInterop-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Applications for Demo - iOS Development";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -561,16 +593,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PL54F4LJG7;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = M5HPC5ZBYS;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MARKETING_VERSION = 1.4.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.51vv.GLInterop-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Applications for Demo - iOS Development";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

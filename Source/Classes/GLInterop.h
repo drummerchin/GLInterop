@@ -8,9 +8,15 @@
 #import <Foundation/Foundation.h>
 
 #import "GLIContext.h"
-#import "GLIPixelBufferPool.h"
+#import "GLITexture.h"
 #import "GLITextureCache.h"
+#import "GLIMetalTextureCache.h"
+#import "GLIPixelBufferPool.h"
+
 #import "GLIRenderTarget.h"
 #import "GLIMetalRenderTarget.h"
+#import "GLIFramebufferTextureRenderTarget.h"
+#import "GLITextureRenderTarget.h"
+
 #import "GLIRenderer.h"
 #import "GLITransform.h"
