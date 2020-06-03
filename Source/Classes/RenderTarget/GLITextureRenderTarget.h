@@ -17,6 +17,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readwrite) GLuint glTexture;
 
+/*!
+ @abstract The width of the render target.
+ */
+@property (nonatomic) NSUInteger width;
+
+/*!
+ @abstract The height of the render target.
+ */
+@property (nonatomic) NSUInteger height;
+
 @end
 
 NS_ASSUME_NONNULL_END
