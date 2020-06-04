@@ -312,17 +312,17 @@ void GLProgramApplyUniforms(GLIProgramRef p)
         struct GLIUniform uniform = p->uniforms[i];
         switch (uniform.type) {
             case GL_FLOAT:      glUniform1fv(uniform.location, uniform.size, &uniform.value.f); break;
-            case GL_FLOAT_VEC2: glUniform1fv(uniform.location, uniform.size, uniform.value.f2); break;
-            case GL_FLOAT_VEC3: glUniform1fv(uniform.location, uniform.size, uniform.value.f3); break;
-            case GL_FLOAT_VEC4: glUniform1fv(uniform.location, uniform.size, uniform.value.f4); break;
+            case GL_FLOAT_VEC2: glUniform2fv(uniform.location, uniform.size, uniform.value.f2); break;
+            case GL_FLOAT_VEC3: glUniform3fv(uniform.location, uniform.size, uniform.value.f3); break;
+            case GL_FLOAT_VEC4: glUniform4fv(uniform.location, uniform.size, uniform.value.f4); break;
             case GL_BOOL:
             case GL_INT:        glUniform1iv(uniform.location, uniform.size, &uniform.value.i); break;
             case GL_BOOL_VEC2:
-            case GL_INT_VEC2:   glUniform1iv(uniform.location, uniform.size, uniform.value.i2); break;
+            case GL_INT_VEC2:   glUniform2iv(uniform.location, uniform.size, uniform.value.i2); break;
             case GL_BOOL_VEC3:
-            case GL_INT_VEC3:   glUniform1iv(uniform.location, uniform.size, uniform.value.i3); break;
+            case GL_INT_VEC3:   glUniform3iv(uniform.location, uniform.size, uniform.value.i3); break;
             case GL_BOOL_VEC4:
-            case GL_INT_VEC4:   glUniform1iv(uniform.location, uniform.size, uniform.value.i4); break;
+            case GL_INT_VEC4:   glUniform4iv(uniform.location, uniform.size, uniform.value.i4); break;
             case GL_FLOAT_MAT2: glUniformMatrix2fv(uniform.location, uniform.size, GL_FALSE, uniform.value.m2x2); break;
             case GL_FLOAT_MAT3: glUniformMatrix3fv(uniform.location, uniform.size, GL_FALSE, uniform.value.m3x3); break;
             case GL_FLOAT_MAT4: glUniformMatrix4fv(uniform.location, uniform.size, GL_FALSE, uniform.value.m4x4); break;
