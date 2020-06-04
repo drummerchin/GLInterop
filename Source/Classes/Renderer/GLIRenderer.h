@@ -73,6 +73,12 @@ struct GLIFramebuffer
 
 @end
 
+@interface GLIRenderer (GLISubclassingHooks)
+
+- (void)willApplyUniforms;
+
+@end
+
 @interface GLIRenderer (GLIProtectedMethods)
 
 @property (nonatomic, strong, class, readonly) NSString *defaultVertexString;

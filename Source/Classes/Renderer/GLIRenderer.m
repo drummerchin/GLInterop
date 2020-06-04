@@ -267,6 +267,11 @@ const char * GLIDefaultVertexString = GLI_SHADER(
     glFinish();
 }
 
+- (void)willApplyUniforms
+{
+    
+}
+
 #pragma mark - utils for subclassing
 
 + (NSString *)defaultVertexString
@@ -305,6 +310,7 @@ const char * GLIDefaultVertexString = GLI_SHADER(
 
 - (void)applyUniforms
 {
+    [self willApplyUniforms];
     GLProgramApplyUniforms(_prog);
 }
 
