@@ -47,42 +47,56 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
 {
     if (self = [super init])
     {
-        _target = GL_TEXTURE_2D;
-        _name = 0;
-        _minFilter = GLIMinFilter_Linear;
-        _magFilter = GLIMagFilter_Linear;
-        _wrapS = GLIAddressMode_ClampToEdge;
-        _wrapT = GLIAddressMode_ClampToEdge;
+        self.target = GL_TEXTURE_2D;
+        self.name = 0;
+        self.minFilter = GLIMinFilter_Linear;
+        self.magFilter = GLIMagFilter_Linear;
+        self.wrapS = GLIAddressMode_ClampToEdge;
+        self.wrapT = GLIAddressMode_ClampToEdge;
     }
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    GLITexture *copy = [[self.class allocWithZone:zone] init];
+    copy.target = self.target;
+    copy.name = self.name;
+    copy.width = self.width;
+    copy.height = self.height;
+    copy.minFilter = self.minFilter;
+    copy.magFilter = self.magFilter;
+    copy.wrapS = self.wrapS;
+    copy.wrapT = self.wrapT;
+    return copy;
+}
+
 - (void)upload
 {
-    glBindTexture(_target, _name);
-    glTexParameteri(_target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(_minFilter));
-    glTexParameteri(_target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(_magFilter));
-    glTexParameteri(_target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(_wrapS));
-    glTexParameteri(_target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(_wrapT));
-    glBindTexture(_target, 0);
+    glBindTexture(self.target, self.name);
+    glTexParameteri(self.target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(self.minFilter));
+    glTexParameteri(self.target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(self.magFilter));
+    glTexParameteri(self.target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(self.wrapS));
+    glTexParameteri(self.target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(self.wrapT));
+    glBindTexture(self.target, 0);
 }
 
 - (void)setTextureParameters
 {
-    glBindTexture(_target, _name);
-    glTexParameteri(_target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(_minFilter));
-    glTexParameteri(_target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(_magFilter));
-    glTexParameteri(_target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(_wrapS));
-    glTexParameteri(_target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(_wrapT));
-    glBindTexture(_target, 0);
+    glBindTexture(self.target, self.name);
+    glTexParameteri(self.target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(self.minFilter));
+    glTexParameteri(self.target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(self.magFilter));
+    glTexParameteri(self.target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(self.wrapS));
+    glTexParameteri(self.target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(self.wrapT));
+    glBindTexture(self.target, 0);
 }
 
 - (void)applyTextureParamters
 {
-    glTexParameteri(_target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(_minFilter));
-    glTexParameteri(_target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(_magFilter));
-    glTexParameteri(_target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(_wrapS));
-    glTexParameteri(_target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(_wrapT));
+    glTexParameteri(self.target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(self.minFilter));
+    glTexParameteri(self.target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(self.magFilter));
+    glTexParameteri(self.target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(self.wrapS));
+    glTexParameteri(self.target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(self.wrapT));
 }
 
 @end

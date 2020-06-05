@@ -39,7 +39,7 @@ typedef enum : NSUInteger {
     GLIMagFilter_Nearest,
 } GLIMagFilter;
 
-@interface GLITexture : NSObject <GLITexture>
+@interface GLITexture : NSObject <GLITexture, NSCopying>
 
 /*!
  @abstract The target of the texture.
