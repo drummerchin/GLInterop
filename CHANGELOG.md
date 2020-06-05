@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add `willApplyUniforms` for subclassing hooks in *GLIRenderer*.
+- Add `preserveContents` in *GLIRenderer*.
+- Add NSCopying support in *GLITexture*.
+- Add `texture`in *GLIRenderTarget* protocol and implement it.
 
 ### Fixed
 

@@ -29,6 +29,11 @@ struct GLIFramebuffer
 @interface GLIRenderer : NSObject
 
 /*!
+ @abstract An boolean value that indicates whether to preserve existing contents of render target. Default value is NO.
+ */
+@property (nonatomic) BOOL preserveContents;
+
+/*!
  @property clearColor
  @abstarct The clear color to be rendered.
  */

@@ -15,6 +15,8 @@
 {
     id _cvPixelBuffer;
     id _cvTexture;
+    
+    GLITexture *_texture;
 }
 
 @property (nonatomic) NSUInteger width;
@@ -26,6 +28,7 @@
 
 @implementation GLIRenderTarget
 @synthesize width, height, glTexture;
+@dynamic texture;
 @dynamic pixelBuffer, mtlTexture;
 
 #pragma mark - life cycle
@@ -95,9 +98,24 @@
     return [self initWithSize:size glTextureCache:[GLITextureCache sharedTextureCache]];
 }
 
+#pragma mark -
+
 - (CVPixelBufferRef)pixelBuffer
 {
     return (__bridge CVPixelBufferRef)_cvPixelBuffer;
+}
+
+- (id<GLITexture>)texture
+{
+    if (!_texture)
+    {
+        _texture = [GLITexture new];
+        _texture.target = GL_TEXTURE_2D;
+        _texture.name = self.glTexture;
+        _texture.width = self.width;
+        _texture.height = self.height;
+    }
+    return _texture;
 }
 
 @end

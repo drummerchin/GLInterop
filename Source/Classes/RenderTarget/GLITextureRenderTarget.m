@@ -6,9 +6,21 @@
 //
 
 #import "GLITextureRenderTarget.h"
-#import <OpenGLES/ES3/glext.h>
+#import "GLITexture.h"
+#import <OpenGLES/ES2/gl.h>
 
 @implementation GLITextureRenderTarget
+@dynamic texture;
 @synthesize glTexture, width, height;
+
+- (id<GLITexture>)texture
+{
+    GLITexture *texture = [GLITexture new];
+    texture.target = GL_TEXTURE_2D;
+    texture.name = self.glTexture;
+    texture.width = self.width;
+    texture.height = self.height;
+    return texture;
+}
 
 @end

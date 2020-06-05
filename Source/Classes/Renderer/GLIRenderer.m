@@ -198,6 +198,7 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_DEPTH_TEST);
         
+        self.preserveContents = NO;
         self.clearColor = [UIColor clearColor];
     }
     return self;
@@ -220,10 +221,14 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         return NO;
     }
     
-    CGFloat clearColorR = 0, clearColorG = 0, clearColorB = 0, clearColorA = 0;
-    [self.clearColor getRed:&clearColorR green:&clearColorG blue:&clearColorB alpha:&clearColorA];
-    glClearColor(clearColorR, clearColorG, clearColorB, clearColorA);
-    glClear(GL_COLOR_BUFFER_BIT);
+    if (!self.preserveContents)
+    {
+        CGFloat clearColorR = 0, clearColorG = 0, clearColorB = 0, clearColorA = 0;
+        [self.clearColor getRed:&clearColorR green:&clearColorG blue:&clearColorB alpha:&clearColorA];
+        glClearColor(clearColorR, clearColorG, clearColorB, clearColorA);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+    
     return YES;
 }
 
