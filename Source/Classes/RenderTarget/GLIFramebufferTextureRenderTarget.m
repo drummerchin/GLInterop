@@ -23,6 +23,7 @@
 @end
 
 @implementation GLIFramebufferTextureRenderTarget
+@dynamic texture;
 @synthesize width, height, glTexture;
 
 - (void)dealloc
@@ -82,6 +83,11 @@
     [self.clearColor getRed:&clearColorR green:&clearColorG blue:&clearColorB alpha:&clearColorA];
     glClearColor(clearColorR, clearColorG, clearColorB, clearColorA);
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+- (id<GLITexture>)texture
+{
+    return [_texture copy];
 }
 
 @end

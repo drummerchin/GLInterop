@@ -9,6 +9,7 @@
 #define GLIRenderTargetProtocol_h
 
 #import <CoreVideo/CoreVideo.h>
+#import "GLITexture.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,6 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract The height of the render target.
  */
 @property (nonatomic, readonly) NSUInteger height;
+
+/*!
+ @abstract The GL texture object that come from the render target.
+ */
+@property (nonatomic, strong, readonly) id<GLITexture> texture;
 
 @optional
 
