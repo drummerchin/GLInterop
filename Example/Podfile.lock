@@ -1,6 +1,6 @@
 PODS:
   - Expecta (1.0.6)
-  - GLInterop (1.4.0)
+  - GLInterop (1.5.0)
   - Specta (1.0.7)
 
 DEPENDENCIES:
@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
-  GLInterop: 45ad74dd5404cef460f729e5a1e77c4c6245812c
+  GLInterop: 05053c181aacffa8fd101e1e1306d113fa8a132c
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
 PODFILE CHECKSUM: 9a3d17de8ff534456243bc6fb9432a5dce157bae

@@ -577,7 +577,7 @@
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -600,7 +600,7 @@
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
