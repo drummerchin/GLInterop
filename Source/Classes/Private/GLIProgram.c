@@ -303,7 +303,7 @@ void GLIProgramSetUniformBytes(GLIProgramRef p, char *uniformName, void *bytes)
     }
 }
 
-void GLProgramApplyUniforms(GLIProgramRef p)
+void GLIProgramApplyUniforms(GLIProgramRef p)
 {
     if (p == NULL) return;
     int texLoc = 0;
@@ -342,11 +342,26 @@ void GLIProgramDestroy(GLIProgramRef p)
 {
     if (p)
     {
+        for (int i = 0; i < p->vertexAttribCount; i++)
+        {
+            struct GLIVertexAttrib vertexAttrib =  p->vertexAttribs[i];
+            free(vertexAttrib.name);
+            vertexAttrib.name = NULL;
+        }
+
+        for (int i = 0; i < p->uniformCount; i++)
+        {
+            struct GLIUniform uniform =  p->uniforms[i];
+            free(uniform.name);
+            uniform.name = NULL;
+        }
+
         if (p->attribArray)
         {
             free(p->attribArray);
             p->attribArray = NULL;
         }
+        
         if (p->vert)
         {
             glDeleteShader(p->vert);
@@ -365,10 +380,12 @@ void GLIProgramDestroy(GLIProgramRef p)
         if (p->vertexAttribs)
         {
             free(p->vertexAttribs);
+            p->vertexAttribs = NULL;
         }
         if (p->uniforms)
         {
             free(p->uniforms);
+            p->uniforms = NULL;
         }
         free(p);
     }

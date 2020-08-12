@@ -43,6 +43,18 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
 
 @implementation GLITexture
 
+- (void)dealloc
+{
+    if (self.deleteTextureWhileDeallocating)
+    {
+        if (self.name)
+        {
+            GLuint tex = self.name;
+            glDeleteTextures(1, &tex);
+        }
+    }
+}
+
 - (instancetype)init
 {
     if (self = [super init])
@@ -91,12 +103,11 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
     glBindTexture(self.target, 0);
 }
 
-- (void)applyTextureParamters
+- (void)setDimensions
 {
-    glTexParameteri(self.target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(self.minFilter));
-    glTexParameteri(self.target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(self.magFilter));
-    glTexParameteri(self.target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(self.wrapS));
-    glTexParameteri(self.target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(self.wrapT));
+    glBindTexture(self.target, self.name);
+    glTexImage2D(self.target, 0, GL_RGBA, (GLsizei)self.width, (GLsizei)self.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glBindTexture(self.target, 0);
 }
 
 @end
