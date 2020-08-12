@@ -569,7 +569,7 @@
 			baseConfigurationReference = C9E26BE8C1B86C6BD0AAA1FB /* Pods-GLInterop_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = M5HPC5ZBYS;
@@ -577,7 +577,7 @@
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -592,7 +592,7 @@
 			baseConfigurationReference = 14CC9C2AA4C5E33167C67649 /* Pods-GLInterop_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = M5HPC5ZBYS;
@@ -600,7 +600,7 @@
 				GCC_PREFIX_HEADER = "GLInterop/GLInterop-Prefix.pch";
 				INFOPLIST_FILE = "GLInterop/GLInterop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.face2d.demo.GLInterop-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";

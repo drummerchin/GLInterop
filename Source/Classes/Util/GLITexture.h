@@ -39,7 +39,7 @@ typedef enum : NSUInteger {
     GLIMagFilter_Nearest,
 } GLIMagFilter;
 
-@interface GLITexture : NSObject <GLITexture>
+@interface GLITexture : NSObject <GLITexture, NSCopying>
 
 /*!
  @abstract The target of the texture.
@@ -85,6 +85,11 @@ typedef enum : NSUInteger {
  */
 @property (nonatomic) GLIAddressMode wrapT;
 
+/*!
+ @abstract A boolean value that indicate whether delete the texture when the receiver is deallocating. Default is NO.
+ */
+@property (nonatomic) BOOL deleteTextureWhileDeallocating;
+
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /*!
@@ -99,7 +104,10 @@ typedef enum : NSUInteger {
  */
 - (void)setTextureParameters;
 
-- (void)applyTextureParamters;
+/*!
+ @abstract For new created texture, set the texture's width, height and pixel format (GL_RGBA).
+ */
+- (void)setDimensions;
 
 @end
 

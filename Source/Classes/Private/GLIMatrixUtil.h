@@ -9,6 +9,8 @@
 #ifndef GLIMatrixUtil_h
 #define GLIMatrixUtil_h
 
+#include <QuartzCore/QuartzCore.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -51,6 +53,8 @@ void GLIMatrixMultiply(float* ret, const float* lhs, const float* rhs);
 
 // MTX = IdentityMatrix
 void GLIMatrixLoadIdentity(float* m);
+
+void GLIMatrixLoadCATransform3D(float *m, CATransform3D transform);
 
 void GLIMatrixLoadDiagonal(float *m, float *vec4);
     

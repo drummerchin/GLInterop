@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 // stringify shader source
 #define GLI_SHADER(shader) #shader
 
+#define GLI_EXT(ext) "#extension " #ext " : require\n"
+
 struct GLIFramebuffer
 {
     GLenum target; // GL_FRAMEBUFFER, GL_FRAMEBUFFER_EXT, etc.
@@ -27,6 +29,11 @@ struct GLIFramebuffer
  @abstract  An renderer that used to render GL contents to an interoperable render target (aka *GLIRenderTarget*).
  */
 @interface GLIRenderer : NSObject
+
+/*!
+ @abstract An boolean value that indicates whether to preserve existing contents of render target. Default value is NO.
+ */
+@property (nonatomic) BOOL preserveContents;
 
 /*!
  @property clearColor
@@ -70,6 +77,12 @@ struct GLIFramebuffer
  @discussion    This operation will implictly enforce the GPU to execute all the commands called before.
  */
 - (void)waitUntilCompleted;
+
+@end
+
+@interface GLIRenderer (GLISubclassingHooks)
+
+- (void)willApplyUniforms;
 
 @end
 

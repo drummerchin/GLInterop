@@ -80,7 +80,8 @@ const char * GLIDefaultVertexString = GLI_SHADER(
                     if (!uniformName || !texture) return;
                     const void *propKey = NSSelectorFromString(uniformName);
                     id<GLITexture> propObj = objc_getAssociatedObject(self, propKey);
-                    if (propObj != texture)
+                    if (!propObj
+                        || propObj != texture)
                     {
                         objc_setAssociatedObject(self, propKey, texture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
                         [self setTexture:uniformName texture:texture.name];
@@ -94,8 +95,8 @@ const char * GLIDefaultVertexString = GLI_SHADER(
                     if (!uniformName) return;
                     const void *propKey = NSSelectorFromString(uniformName);
                     NSNumber *propObj = objc_getAssociatedObject(self, propKey);
-                    float propValue = [propObj floatValue];
-                    if (propValue != value)
+                    if (!propObj
+                        || [propObj floatValue] != value)
                     {
                         objc_setAssociatedObject(self, propKey, @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
                         [self setUniform:uniformName bytes:&value];
@@ -109,8 +110,8 @@ const char * GLIDefaultVertexString = GLI_SHADER(
                     if (!uniformName) return;
                     const void *propKey = NSSelectorFromString(uniformName);
                     NSNumber *propObj = objc_getAssociatedObject(self, propKey);
-                    float propValue = [propObj intValue];
-                    if (propValue != value)
+                    if (!propObj
+                        || [propObj intValue] != value)
                     {
                         objc_setAssociatedObject(self, propKey, @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
                         [self setUniform:uniformName bytes:&value];
@@ -169,6 +170,7 @@ const char * GLIDefaultVertexString = GLI_SHADER(
     if (_framebuffer.name)
     {
         glDeleteFramebuffers(1, &_framebuffer.name);
+        _framebuffer.name = 0;
     }
 }
 
@@ -198,6 +200,7 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_DEPTH_TEST);
         
+        self.preserveContents = NO;
         self.clearColor = [UIColor clearColor];
     }
     return self;
@@ -220,10 +223,14 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         return NO;
     }
     
-    CGFloat clearColorR = 0, clearColorG = 0, clearColorB = 0, clearColorA = 0;
-    [self.clearColor getRed:&clearColorR green:&clearColorG blue:&clearColorB alpha:&clearColorA];
-    glClearColor(clearColorR, clearColorG, clearColorB, clearColorA);
-    glClear(GL_COLOR_BUFFER_BIT);
+    if (!self.preserveContents)
+    {
+        CGFloat clearColorR = 0, clearColorG = 0, clearColorB = 0, clearColorA = 0;
+        [self.clearColor getRed:&clearColorR green:&clearColorG blue:&clearColorB alpha:&clearColorA];
+        glClearColor(clearColorR, clearColorG, clearColorB, clearColorA);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+    
     return YES;
 }
 
@@ -234,7 +241,7 @@ const char * GLIDefaultVertexString = GLI_SHADER(
     {
         id<GLITexture> firstTexture = [self.inputTextures firstObject];
         glUseProgram(self.program);
-        [self setViewPortWithContentMode:UIViewContentModeCenter inputSize:CGSizeMake(firstTexture.width, firstTexture.height)];
+        [self setViewPortWithContentMode:UIViewContentModeScaleAspectFit inputSize:CGSizeMake(firstTexture.width, firstTexture.height)];
         [self applyVertexAttribute:@"position" bytes:&(GLfloat[]){
             -1.0, -1.0, 0.0, 1.0,
              1.0, -1.0, 0.0, 1.0,
@@ -265,6 +272,11 @@ const char * GLIDefaultVertexString = GLI_SHADER(
 - (void)waitUntilCompleted
 {
     glFinish();
+}
+
+- (void)willApplyUniforms
+{
+    
 }
 
 #pragma mark - utils for subclassing
@@ -305,7 +317,8 @@ const char * GLIDefaultVertexString = GLI_SHADER(
 
 - (void)applyUniforms
 {
-    GLProgramApplyUniforms(_prog);
+    [self willApplyUniforms];
+    GLIProgramApplyUniforms(_prog);
 }
 
 + (CGRect)viewPortRectForContentMode:(UIViewContentMode)contentMode drawableSize:(CGSize)drawableSize textureSize:(CGSize)textureSize

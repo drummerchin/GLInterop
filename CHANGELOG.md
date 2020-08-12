@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2020-08-12
+
+### Added
+
+- Add *GLIBaseShapeRenderer*.
+- Add `GLIMatrixLoadCATransform3D` in *GLIMatrixUtil.h*.
+- Add `willApplyUniforms` for subclassing hooks in *GLIRenderer*.
+- Add `preserveContents` in *GLIRenderer*.
+- Add `deleteTextureWhileDeallocating` property in *GLITexture*.
+- Add `setDimensions` method in *GLITexture*.
+- Add NSCopying support in *GLITexture*.
+- Add `texture`in *GLIRenderTarget* protocol and implement it.
+
+### Fixed
+
+- Fix issue that integer uniform can not be set via runtime method `setUniform_`.
+- Fix issue that the frame buffer object should not be created until `prepareFramebuffer` is called in *GLIFramebufferTextureRenderTarget.m*
+- Fix typo `GLProgramApplyUniforms()` to `GLIProgramApplyUniforms()`.
+- Fix property `width` and `height` in *GLITextureRenderTarget*.
+- Fix issue that vector type uniform can not be correctly applied via `GLProgramApplyUniforms()` function.
+
 ## [1.4.0] - 2020-06-02
 
 ### Changed
