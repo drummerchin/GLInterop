@@ -453,6 +453,25 @@ void GLIMatrixLoadIdentity(float* m) {
     m[11] = m[12] = m[13] = m[14] = 0.0;
 }
 
+void GLIMatrixLoadCATransform3D(float *m, CATransform3D t)
+{
+    m[0] = t.m11;
+    m[1] = t.m12;
+    m[2] = t.m13;
+    m[3] = t.m14;
+    m[4] = t.m21;
+    m[5] = t.m22;
+    m[6] = t.m23;
+    m[7] = t.m24;
+    m[8] = t.m31;
+    m[9] = t.m32;
+    m[10] = t.m33;
+    m[11] = t.m34;
+    m[12] = t.m41;
+    m[13] = t.m42;
+    m[14] = t.m43;
+    m[15] = t.m44;
+}
 
 void GLIMatrixLoadDiagonal(float *m, float *vec4)
 {

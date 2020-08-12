@@ -19,4 +19,5 @@
 #import "GLITextureRenderTarget.h"
 
 #import "GLIRenderer.h"
+#import "GLIBaseShapeRenderer.h"
 #import "GLITransform.h"
