@@ -19,7 +19,7 @@ GLI_EXTERN void          GLIProgramParseVertexAttrib(GLIProgramRef p);
 GLI_EXTERN void          GLIProgramParseUniform(GLIProgramRef p);
 GLI_EXTERN void          GLIProgramApplyVertexAttribute(GLIProgramRef p, char *attributeName, void *bytes);
 GLI_EXTERN void          GLIProgramSetUniformBytes(GLIProgramRef p, char *uniformName, void *bytes);
-GLI_EXTERN void          GLProgramApplyUniforms(GLIProgramRef p);
+GLI_EXTERN void          GLIProgramApplyUniforms(GLIProgramRef p);
 
 GLI_EXTERN GLuint        GLIProgramGetProgram(GLIProgramRef p);
 GLI_EXTERN int           GLIProgramAddAttribute(GLIProgramRef p, const char *attribName); //return attribute location, if failed return GL_INVALID_INDEX
