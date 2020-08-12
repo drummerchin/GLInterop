@@ -31,11 +31,7 @@
     if (_framebuffer.name)
     {
         glDeleteFramebuffers(1, &_framebuffer.name);
-    }
-    if (_texture.name)
-    {
-        GLuint tex = _texture.name;
-        glDeleteTextures(1, &tex);
+        _framebuffer.name = 0;
     }
 }
 
@@ -48,6 +44,7 @@
         self.height = height;
         
         _texture = [GLITexture new];
+        _texture.deleteTextureWhileDeallocating = YES;
         _texture.target = GL_TEXTURE_2D;
         GLuint tex = 0;
         glGenTextures(1, &tex);
@@ -57,22 +54,22 @@
         
         self.glTexture = _texture.name;
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(_texture.target, _texture.name);
-        [_texture applyTextureParamters];
-        glTexImage2D(_texture.target, 0, GL_RGBA, (GLsizei)_texture.width, (GLsizei)_texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-        
-        _framebuffer.target = GL_FRAMEBUFFER;
-        glGenFramebuffers(1, &_framebuffer.name);
+        [_texture setTextureParameters];
+        [_texture setDimensions];
     }
     return self;
 }
 
 - (void)prepareFramebuffer
 {
+    if (!_framebuffer.name)
+    {
+        _framebuffer.target = GL_FRAMEBUFFER;
+        glGenFramebuffers(1, &_framebuffer.name);
+    }
+
     glBindFramebuffer(_framebuffer.target, _framebuffer.name);
     glFramebufferTexture2D(_framebuffer.target, GL_COLOR_ATTACHMENT0, _texture.target, _texture.name, 0);
-    glBindTexture(_texture.target, 0);
     GLenum status = glCheckFramebufferStatus(_framebuffer.target);
     if (status != GL_FRAMEBUFFER_COMPLETE)
     {
