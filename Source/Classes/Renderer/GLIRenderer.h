@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 // stringify shader source
 #define GLI_SHADER(shader) #shader
 
+#define GLI_EXT(ext) "#extension " #ext " : require\n"
+
 struct GLIFramebuffer
 {
     GLenum target; // GL_FRAMEBUFFER, GL_FRAMEBUFFER_EXT, etc.
