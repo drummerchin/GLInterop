@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# [1.5.1] - 2020-12-18
+
+### Added
+
+- Add *GLISyncObject*.
+
+### Fixed
+
+- Fix crash of *GLIProgram*.
+
 ## [1.5.0] - 2020-08-12
 
 ### Added
