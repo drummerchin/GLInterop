@@ -99,16 +99,19 @@ GLIProgramRef GLIProgramCreateFromSource(const char *vertexString, const char *f
 
 GLuint GLIProgramGetProgram(GLIProgramRef p)
 {
+    if (!p) return 0;
     return p->prog;
 }
 
 int GLIProgramGetAttributeLocation(GLIProgramRef p, const char *attribName)
 {
+    if (!p) return -1;
     return glGetAttribLocation(p->prog, attribName);
 }
 
 int GLIProgramAddAttribute(GLIProgramRef p, const char *attribName)
 {
+    if (!p) return -1;
     if (p->attribArray == NULL)
     {
         p->addedAttribCount = 0;
@@ -137,7 +140,6 @@ int GLIProgramAddAttribute(GLIProgramRef p, const char *attribName)
 
 int GLIProgramLinkAndValidate(GLIProgramRef p)
 {
-    assert(p);
     if (!p) return 0;
     glLinkProgram(p->prog);
     glValidateProgram(p->prog);
@@ -171,11 +173,13 @@ int GLIProgramLinkAndValidate(GLIProgramRef p)
 
 int GLIProgramIsValidate(GLIProgramRef p)
 {
+    if (!p) return 0;
     return p->hasLinkAndValidate;
 }
 
 void GLIProgramParseVertexAttrib(GLIProgramRef p)
 {
+    if (!p) return;
     GLint activeAttributes;
     glGetProgramiv(p->prog, GL_ACTIVE_ATTRIBUTES, &activeAttributes);
     GLint length;
@@ -198,6 +202,7 @@ void GLIProgramParseVertexAttrib(GLIProgramRef p)
 
 void GLIProgramParseUniform(GLIProgramRef p)
 {
+    if (!p) return;
     GLint activeUniforms;
     glGetProgramiv(p->prog, GL_ACTIVE_UNIFORMS, &activeUniforms);
     GLint length;
@@ -224,17 +229,19 @@ void GLIProgramParseUniform(GLIProgramRef p)
 
 void GLIProgramUse(GLIProgramRef p)
 {
-    assert(p->prog);
+    if (!p) return;
     glUseProgram(p->prog);
 }
 
 int GLIProgramGetUniformLocation(GLIProgramRef p, const char *uniformName)
 {
+    if (!p) return -1;
     return glGetUniformLocation(p->prog, (GLchar *)uniformName);
 }
 
 struct GLIVertexAttrib *GLIProgramGetVertexAttribute(GLIProgramRef p, char *attributeName)
 {
+    if (!p) return NULL;
     for (int i = 0; i < p->vertexAttribCount; i++)
     {
         struct GLIVertexAttrib *attrib = &p->vertexAttribs[i];
@@ -248,6 +255,7 @@ struct GLIVertexAttrib *GLIProgramGetVertexAttribute(GLIProgramRef p, char *attr
 
 struct GLIUniform *GLIProgramGetUniform(GLIProgramRef p, char *uniformName)
 {
+    if (!p) return NULL;
     for (int i = 0; i < p->uniformCount; i++)
     {
         struct GLIUniform *uniform = &p->uniforms[i];
@@ -261,6 +269,7 @@ struct GLIUniform *GLIProgramGetUniform(GLIProgramRef p, char *uniformName)
 
 void GLIProgramApplyVertexAttribute(GLIProgramRef p, char *attributeName, void *bytes)
 {
+    if (!p) return;
     struct GLIVertexAttrib *vertexAttrib = GLIProgramGetVertexAttribute(p, attributeName);
     if (vertexAttrib == NULL) return;
     
@@ -278,6 +287,7 @@ void GLIProgramApplyVertexAttribute(GLIProgramRef p, char *attributeName, void *
 
 void GLIProgramSetUniformBytes(GLIProgramRef p, char *uniformName, void *bytes)
 {
+    if (!p) return;
     struct GLIUniform *uniform = GLIProgramGetUniform(p, uniformName);
     if (uniform == NULL) return;
 
@@ -305,7 +315,7 @@ void GLIProgramSetUniformBytes(GLIProgramRef p, char *uniformName, void *bytes)
 
 void GLIProgramApplyUniforms(GLIProgramRef p)
 {
-    if (p == NULL) return;
+    if (!p) return;
     int texLoc = 0;
     for (int i = 0; i < p->uniformCount; i++)
     {
@@ -340,53 +350,51 @@ void GLIProgramApplyUniforms(GLIProgramRef p)
 
 void GLIProgramDestroy(GLIProgramRef p)
 {
-    if (p)
+    if (!p) return;
+    for (int i = 0; i < p->vertexAttribCount; i++)
     {
-        for (int i = 0; i < p->vertexAttribCount; i++)
-        {
-            struct GLIVertexAttrib vertexAttrib =  p->vertexAttribs[i];
-            free(vertexAttrib.name);
-            vertexAttrib.name = NULL;
-        }
-
-        for (int i = 0; i < p->uniformCount; i++)
-        {
-            struct GLIUniform uniform =  p->uniforms[i];
-            free(uniform.name);
-            uniform.name = NULL;
-        }
-
-        if (p->attribArray)
-        {
-            free(p->attribArray);
-            p->attribArray = NULL;
-        }
-        
-        if (p->vert)
-        {
-            glDeleteShader(p->vert);
-            p->vert = 0;
-        }
-        if (p->frag)
-        {
-            glDeleteShader(p->frag);
-            p->frag = 0;
-        }
-        if (p->prog)
-        {
-            glDeleteProgram(p->prog);
-            p->prog = 0;
-        }
-        if (p->vertexAttribs)
-        {
-            free(p->vertexAttribs);
-            p->vertexAttribs = NULL;
-        }
-        if (p->uniforms)
-        {
-            free(p->uniforms);
-            p->uniforms = NULL;
-        }
-        free(p);
+        struct GLIVertexAttrib vertexAttrib =  p->vertexAttribs[i];
+        free(vertexAttrib.name);
+        vertexAttrib.name = NULL;
     }
+
+    for (int i = 0; i < p->uniformCount; i++)
+    {
+        struct GLIUniform uniform =  p->uniforms[i];
+        free(uniform.name);
+        uniform.name = NULL;
+    }
+
+    if (p->attribArray)
+    {
+        free(p->attribArray);
+        p->attribArray = NULL;
+    }
+    
+    if (p->vert)
+    {
+        glDeleteShader(p->vert);
+        p->vert = 0;
+    }
+    if (p->frag)
+    {
+        glDeleteShader(p->frag);
+        p->frag = 0;
+    }
+    if (p->prog)
+    {
+        glDeleteProgram(p->prog);
+        p->prog = 0;
+    }
+    if (p->vertexAttribs)
+    {
+        free(p->vertexAttribs);
+        p->vertexAttribs = NULL;
+    }
+    if (p->uniforms)
+    {
+        free(p->uniforms);
+        p->uniforms = NULL;
+    }
+    free(p);        
 }
