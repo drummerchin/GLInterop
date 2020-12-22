@@ -334,8 +334,9 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
                           m.columns[0].z, m.columns[1].z, m.columns[2].z, m.columns[3].z,
                           m.columns[0].w, m.columns[1].w, m.columns[2].w, m.columns[3].w);
         
-    GLIProgramApplyVertexAttribute(self.textureQuadProgram, "position", positions);
-    GLIProgramApplyVertexAttribute(self.textureQuadProgram, "texCoord", texCoords);
+    GLIProgramSetVertexAttributeToBuffer(self.textureQuadProgram, "position", positions, sizeof(float) * 16);
+    GLIProgramSetVertexAttributeToBuffer(self.textureQuadProgram, "texCoord", texCoords, sizeof(float) * 8);
+    GLIProgramApplyVertexAttributes(self.textureQuadProgram);
     
     GLIProgramSetUniformBytes(self.textureQuadProgram, "mvpMatrix", mvpMatrix);
     GLuint tex = texture.name;
@@ -392,9 +393,10 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
                           m.columns[0].z, m.columns[1].z, m.columns[2].z, m.columns[3].z,
                           m.columns[0].w, m.columns[1].w, m.columns[2].w, m.columns[3].w);
         
-    GLIProgramApplyVertexAttribute(self.colorQuadProgram, "position", positions);
-    GLIProgramApplyVertexAttribute(self.colorQuadProgram, "texCoord", texCoords);
-        
+    GLIProgramSetVertexAttributeToBuffer(self.colorQuadProgram, "position", positions, sizeof(float) * 16);
+    GLIProgramSetVertexAttributeToBuffer(self.colorQuadProgram, "texCoord", texCoords, sizeof(float) * 8);
+    GLIProgramApplyVertexAttributes(self.colorQuadProgram);
+
     GLIProgramSetUniformBytes(self.colorQuadProgram, "mvpMatrix", mvpMatrix);
     
     CGFloat r, g, b, a;
@@ -455,7 +457,9 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
                           m.columns[0].z, m.columns[1].z, m.columns[2].z, m.columns[3].z,
                           m.columns[0].w, m.columns[1].w, m.columns[2].w, m.columns[3].w);
 
-    GLIProgramApplyVertexAttribute(self.pointProgram, "position", vertices2d);
+    GLIProgramSetVertexAttributeToBuffer(self.pointProgram, "position", vertices2d, sizeof(vector_float2) * count);
+    GLIProgramApplyVertexAttributes(self.pointProgram);
+
     GLIProgramSetUniformBytes(self.pointProgram, "mvpMatrix", mvpMatrix);
 
     CGFloat r, g, b, a;

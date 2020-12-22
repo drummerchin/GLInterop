@@ -35,6 +35,7 @@ struct GLIVertexAttrib
     GLint size;
     GLenum type;
     char *name;
+    GLuint vbo;
 };
 
 struct GLIUniform
@@ -193,6 +194,9 @@ void GLIProgramParseVertexAttrib(GLIProgramRef p)
             vertexAttrib.name = calloc(length, sizeof(char));
             glGetActiveAttrib(p->prog, i, length, NULL, &vertexAttrib.size, &vertexAttrib.type, vertexAttrib.name);
             vertexAttrib.index = glGetAttribLocation(p->prog, vertexAttrib.name);
+            GLuint vbo = 0;
+            glGenBuffers(1, &vbo);
+            vertexAttrib.vbo = vbo;
             p->vertexAttribs[i] = vertexAttrib;
             //printf("[vertex attribute] index: %d, name: %s, size: %d, type: %x\n", vertexAttrib.index, vertexAttrib.name, vertexAttrib.size, vertexAttrib.type);
         }
@@ -274,14 +278,48 @@ void GLIProgramApplyVertexAttribute(GLIProgramRef p, char *attributeName, void *
     if (vertexAttrib == NULL) return;
     
     glEnableVertexAttribArray(vertexAttrib->index);
+    void *data = bytes;
     switch (vertexAttrib->type) {
-        case GL_FLOAT_VEC2: glVertexAttribPointer(vertexAttrib->index, 2, GL_FLOAT, GL_FALSE, 0, bytes); break;
-        case GL_FLOAT_VEC3: glVertexAttribPointer(vertexAttrib->index, 3, GL_FLOAT, GL_FALSE, 0, bytes); break;
-        case GL_FLOAT_VEC4: glVertexAttribPointer(vertexAttrib->index, 4, GL_FLOAT, GL_FALSE, 0, bytes); break;
-        case GL_INT_VEC2: glVertexAttribPointer(vertexAttrib->index, 2, GL_INT, GL_FALSE, 0, bytes); break;
-        case GL_INT_VEC3: glVertexAttribPointer(vertexAttrib->index, 3, GL_INT, GL_FALSE, 0, bytes); break;
-        case GL_INT_VEC4: glVertexAttribPointer(vertexAttrib->index, 4, GL_INT, GL_FALSE, 0, bytes); break;
+        case GL_FLOAT_VEC2: glVertexAttribPointer(vertexAttrib->index, 2, GL_FLOAT, GL_FALSE, 0, data); break;
+        case GL_FLOAT_VEC3: glVertexAttribPointer(vertexAttrib->index, 3, GL_FLOAT, GL_FALSE, 0, data); break;
+        case GL_FLOAT_VEC4: glVertexAttribPointer(vertexAttrib->index, 4, GL_FLOAT, GL_FALSE, 0, data); break;
+        case GL_INT_VEC2: glVertexAttribPointer(vertexAttrib->index, 2, GL_INT, GL_FALSE, 0, data); break;
+        case GL_INT_VEC3: glVertexAttribPointer(vertexAttrib->index, 3, GL_INT, GL_FALSE, 0, data); break;
+        case GL_INT_VEC4: glVertexAttribPointer(vertexAttrib->index, 4, GL_INT, GL_FALSE, 0, data); break;
         default: break;
+    }
+}
+
+void GLIProgramSetVertexAttributeToBuffer(GLIProgramRef p, char *attributeName, void *bytes, size_t size)
+{
+    if (!p) return;
+    struct GLIVertexAttrib *vertexAttrib = GLIProgramGetVertexAttribute(p, attributeName);
+    if (vertexAttrib == NULL) return;
+    
+    glBindBuffer(GL_ARRAY_BUFFER, vertexAttrib->vbo);
+    glBufferData(GL_ARRAY_BUFFER, size, bytes, GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void GLIProgramApplyVertexAttributes(GLIProgramRef p)
+{
+    if (!p) return;
+    for (int i = 0; i < p->vertexAttribCount; i++)
+    {
+        struct GLIVertexAttrib vertexAttrib = p->vertexAttribs[i];
+        glBindBuffer(GL_ARRAY_BUFFER, vertexAttrib.vbo);
+        void *data = NULL;
+        switch (vertexAttrib.type) {
+            case GL_FLOAT_VEC2: glVertexAttribPointer(vertexAttrib.index, 2, GL_FLOAT, GL_FALSE, 0, data); break;
+            case GL_FLOAT_VEC3: glVertexAttribPointer(vertexAttrib.index, 3, GL_FLOAT, GL_FALSE, 0, data); break;
+            case GL_FLOAT_VEC4: glVertexAttribPointer(vertexAttrib.index, 4, GL_FLOAT, GL_FALSE, 0, data); break;
+            case GL_INT_VEC2: glVertexAttribPointer(vertexAttrib.index, 2, GL_INT, GL_FALSE, 0, data); break;
+            case GL_INT_VEC3: glVertexAttribPointer(vertexAttrib.index, 3, GL_INT, GL_FALSE, 0, data); break;
+            case GL_INT_VEC4: glVertexAttribPointer(vertexAttrib.index, 4, GL_INT, GL_FALSE, 0, data); break;
+            default: break;
+        }
+        glEnableVertexAttribArray(vertexAttrib.index);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 }
 
@@ -354,6 +392,11 @@ void GLIProgramDestroy(GLIProgramRef p)
     for (int i = 0; i < p->vertexAttribCount; i++)
     {
         struct GLIVertexAttrib vertexAttrib =  p->vertexAttribs[i];
+        
+        GLuint vbo = vertexAttrib.vbo;
+        if (vbo) glDeleteBuffers(1, &vbo);
+        vertexAttrib.vbo = 0;
+        
         free(vertexAttrib.name);
         vertexAttrib.name = NULL;
     }
@@ -396,5 +439,5 @@ void GLIProgramDestroy(GLIProgramRef p)
         free(p->uniforms);
         p->uniforms = NULL;
     }
-    free(p);        
+    free(p);
 }
