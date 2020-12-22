@@ -17,7 +17,20 @@ GLI_EXTERN GLIProgramRef GLIProgramCreateFromSource(const char *vertexString, co
 
 GLI_EXTERN void          GLIProgramParseVertexAttrib(GLIProgramRef p);
 GLI_EXTERN void          GLIProgramParseUniform(GLIProgramRef p);
-GLI_EXTERN void          GLIProgramApplyVertexAttribute(GLIProgramRef p, char *attributeName, void *bytes);
+
+/// Apply a vertex attribute with given bytes.
+/// Note that these bytes are not buffered by CPU nor GPU, so you're
+/// responsible to keep these bytes until they were consumed, especially
+/// pay attention to the situation of these bytes created on the stack.
+GLI_EXTERN void          GLIProgramApplyVertexAttribute(GLIProgramRef p, char *attributeName, void *bytes) __deprecated;
+
+/// Set a vertex attribute with given bytes and size. The bytes will
+/// be buffered by GPU.
+GLI_EXTERN void          GLIProgramSetVertexAttributeToBuffer(GLIProgramRef p, char *attributeName, void *bytes, size_t size);
+
+/// Apply all the buffered data to vertex attributes of the program.
+GLI_EXTERN void          GLIProgramApplyVertexAttributes(GLIProgramRef p);
+
 GLI_EXTERN void          GLIProgramSetUniformBytes(GLIProgramRef p, char *uniformName, void *bytes);
 GLI_EXTERN void          GLIProgramApplyUniforms(GLIProgramRef p);
 

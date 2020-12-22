@@ -242,18 +242,21 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         id<GLITexture> firstTexture = [self.inputTextures firstObject];
         glUseProgram(self.program);
         [self setViewPortWithContentMode:UIViewContentModeScaleAspectFit inputSize:CGSizeMake(firstTexture.width, firstTexture.height)];
-        [self applyVertexAttribute:@"position" bytes:&(GLfloat[]){
+        
+        [self setVertexAttributeToBuffer:@"position" bytes:&(GLfloat[]){
             -1.0, -1.0, 0.0, 1.0,
              1.0, -1.0, 0.0, 1.0,
             -1.0,  1.0, 0.0, 1.0,
              1.0,  1.0, 0.0, 1.0
-        }];
-        [self applyVertexAttribute:@"texCoord" bytes:&(GLfloat[]){
+        } size:sizeof(float) * 16];
+        [self setVertexAttributeToBuffer:@"texCoord" bytes:&(GLfloat[]){
             0.0f, 0.0f,
             1.0f, 0.0f,
             0.0f, 1.0f,
             1.0f, 1.0f
-        }];
+        } size:sizeof(float) * 8];
+        
+        [self applyVertexAttributes];
         
         for (int i = 0; i < self.inputTextures.count; i++)
         {
@@ -303,6 +306,16 @@ const char * GLIDefaultVertexString = GLI_SHADER(
 - (void)applyVertexAttribute:(NSString *)attribName bytes:(void *)bytes
 {
     GLIProgramApplyVertexAttribute(_prog, (char *)attribName.UTF8String, bytes);
+}
+
+- (void)setVertexAttributeToBuffer:(NSString *)attribName bytes:(void *)bytes size:(size_t)size
+{
+    GLIProgramSetVertexAttributeToBuffer(_prog, (char *)attribName.UTF8String, bytes, size);
+}
+
+- (void)applyVertexAttributes
+{
+    GLIProgramApplyVertexAttributes(_prog);
 }
 
 - (void)setUniform:(NSString *)uniformName bytes:(void *)bytes

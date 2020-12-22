@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### GLIRenderer
+
+- Add `setVertexAttributeToBuffer:bytes:size:` and `applyVertexAttributes` to support GPU buffered vertex attribute.
+- Deprecate `applyVertexAttribute:bytes:` to avoid the potential rendering bug that caused by setting vertext attribute using bytes created on stack.
+
+### Other
+
+- Update *GLIRenderer*, *GLITransform* and *GLIBaseShapeRenderer* to avoid using above deprecated API.
+
 # [1.5.1] - 2020-12-18
 
 ### Added
