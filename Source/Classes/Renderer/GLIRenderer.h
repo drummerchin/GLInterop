@@ -93,7 +93,9 @@ struct GLIFramebuffer
 - (GLuint)program;
 - (BOOL)prepareFramebuffer;
 - (void)setViewPortWithContentMode:(UIViewContentMode)contentMode inputSize:(CGSize)inputSize;
-- (void)applyVertexAttribute:(NSString *)attribName bytes:(void *)bytes;
+- (void)applyVertexAttribute:(NSString *)attribName bytes:(void *)bytes __attribute__((deprecated("Use 'setVertexAttributeToBuffer:bytes:size:' instead.")));
+- (void)setVertexAttributeToBuffer:(NSString *)attribName bytes:(void *)bytes size:(size_t)size;
+- (void)applyVertexAttributes;
 - (void)setUniform:(NSString *)uniformName bytes:(void *)bytes;
 - (void)setTexture:(NSString *)textureName texture:(GLuint)glTexture;
 - (void)applyUniforms;
