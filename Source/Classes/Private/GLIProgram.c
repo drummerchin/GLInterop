@@ -440,4 +440,5 @@ void GLIProgramDestroy(GLIProgramRef p)
         p->uniforms = NULL;
     }
     free(p);
+    p = NULL;
 }
