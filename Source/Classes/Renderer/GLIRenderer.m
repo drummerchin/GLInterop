@@ -37,7 +37,6 @@ const char * GLIDefaultVertexString = GLI_SHADER(
 @interface GLIRenderer ()
 {
     GLIProgramRef _prog;
-    struct GLIFramebuffer _framebuffer;
 }
 
 @end
