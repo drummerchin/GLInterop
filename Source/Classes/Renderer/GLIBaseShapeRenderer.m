@@ -356,6 +356,7 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
     
     GLIProgramSetUniformBytes(self.textureQuadProgram, "mvpMatrix", mvpMatrix);
     GLuint tex = texture.name;
+    GLITextureSetTexParameters(texture);
     GLIProgramSetUniformBytes(self.textureQuadProgram, "inputTexture", &tex);
     float uniformIntensity = (float)intensity;
     GLIProgramSetUniformBytes(self.textureQuadProgram, "intensity", &uniformIntensity);
