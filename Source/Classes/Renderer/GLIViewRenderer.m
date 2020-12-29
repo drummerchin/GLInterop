@@ -33,8 +33,6 @@ static GLfloat const kFlippedTexCoordData[] = {
 
 @implementation GLIViewRenderer
 
-//TODO: cleanup resources
-
 - (instancetype)init
 {
     NSString *fragment = @GLI_SHADER
@@ -65,6 +63,7 @@ static GLfloat const kFlippedTexCoordData[] = {
         NSLog(@"failed to make complete framebuffer object %x", status);
         return NO;
     }
+    [self preprocessFramebuffer];
     return YES;
 }
 
@@ -108,11 +107,8 @@ static GLfloat const kFlippedTexCoordData[] = {
         [self setVertexAttributeToBuffer:@"texCoord" bytes:(void *)(isFlipped ? kFlippedTexCoordData : kTexCoordData) size:sizeof(float) * 8];
         [self applyVertexAttributes];
         
-        for (int i = 0; i < self.inputTextures.count; i++)
-        {
-            NSString *texIndexStr = (i == 0) ? @"" : [NSString stringWithFormat:@"%d", i];
-            [self setTexture:[NSString stringWithFormat:@"inputTexture%@", texIndexStr] texture:firstTexture.name];
-        }
+        GLITextureSetTexParameters(firstTexture);
+        [self setTexture:@"inputTexture" texture:firstTexture.name];
         [self applyUniforms];
         
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

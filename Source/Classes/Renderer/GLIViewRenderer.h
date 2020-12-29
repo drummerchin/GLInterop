@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GLIViewRenderer : GLIRenderer
 
+@property (nonatomic) id<GLIRenderTarget> output NS_UNAVAILABLE;
+
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 - (void)renderToView:(id<GLIRenderableSurface>)renderableSurface isFlipped:(BOOL)isFlipped;
