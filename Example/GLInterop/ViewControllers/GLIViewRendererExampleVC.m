@@ -20,7 +20,6 @@
     
     GLIView *_glView;
     GLIViewRenderer *_viewRenderer;
-    id _cvMetalTexture;
     
     GLIContext *_glContext;
     GLITextureCache *_glTextureCache;
@@ -30,6 +29,8 @@
 
     dispatch_semaphore_t _frameLock;
 }
+
+@property (nonatomic, strong) UIAlertController *contentModeActionMenu;
 
 @end
 
@@ -53,6 +54,7 @@
     [_glContext runTaskWithHint:GLITaskHint_GenericTask block:^{
         _filter = [[GLITransform alloc] init];
         _viewRenderer = [[GLIViewRenderer alloc] init];
+        _viewRenderer.clearColor = [UIColor lightGrayColor];
     }];
 
     // setup camera
@@ -70,7 +72,63 @@
 - (void)setupUI
 {
     _glView = [[GLIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    _glView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:_glView];
+    [self.view addConstraints:@[
+        [NSLayoutConstraint constraintWithItem:_glView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0],
+        [NSLayoutConstraint constraintWithItem:_glView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0],
+        [NSLayoutConstraint constraintWithItem:_glView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:300],
+        [NSLayoutConstraint constraintWithItem:_glView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:300],
+    ]];
+    
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"ContentMode" style:UIBarButtonItemStylePlain target:self action:@selector(contentModeMenuAction:)],
+    ];
+}
+
+- (void)contentModeMenuAction:(UIBarButtonItem *)item
+{
+    [self presentViewController:self.contentModeActionMenu animated:YES completion:nil];
+}
+
+- (UIAlertController *)contentModeActionMenu
+{
+    UIAlertController *menu = [UIAlertController alertControllerWithTitle:@"Select a contentMode" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    NSArray *contentModes = @[
+        @{@"name":@"UIViewContentModeScaleToFill", @"value":@(UIViewContentModeScaleToFill)},
+        @{@"name":@"UIViewContentModeScaleAspectFit", @"value":@(UIViewContentModeScaleAspectFit)},
+        @{@"name":@"UIViewContentModeScaleAspectFill", @"value":@(UIViewContentModeScaleAspectFill)},
+        @{@"name":@"UIViewContentModeCenter", @"value":@(UIViewContentModeCenter)},
+        @{@"name":@"UIViewContentModeTop", @"value":@(UIViewContentModeTop)},
+        @{@"name":@"UIViewContentModeBottom", @"value":@(UIViewContentModeBottom)},
+        @{@"name":@"UIViewContentModeLeft", @"value":@(UIViewContentModeLeft)},
+        @{@"name":@"UIViewContentModeRight", @"value":@(UIViewContentModeRight)},
+        @{@"name":@"UIViewContentModeTopLeft", @"value":@(UIViewContentModeTopLeft)},
+        @{@"name":@"UIViewContentModeTopRight", @"value":@(UIViewContentModeTopRight)},
+        @{@"name":@"UIViewContentModeBottomLeft", @"value":@(UIViewContentModeBottomLeft)},
+        @{@"name":@"UIViewContentModeBottomRight", @"value":@(UIViewContentModeBottomRight)},
+    ];
+    for (int i = 0; i < contentModes.count; i++)
+    {
+        NSDictionary *item = contentModes[i];
+        NSString *title = item[@"name"];
+        UIViewContentMode value = [item[@"value"] unsignedIntegerValue];
+        UIAlertAction *contentModeAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (self)
+            {
+                self->_glView.contentMode = value;
+            }
+        }];
+        contentModeAction.enabled = _glView.contentMode == value ? NO : YES;
+        [menu addAction:contentModeAction];
+    }
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        if (self)
+        {
+            [menu dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
+    [menu addAction:cancelAction];
+    return menu;
 }
 
 #pragma mark - Camera
@@ -141,6 +199,7 @@
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
+    
     if (!CMSampleBufferIsValid(sampleBuffer)) return;
     
     // convert sample buffer to pixel buffer
@@ -151,12 +210,10 @@
     [_glContext runTaskWithHint:GLITaskHint_GenericTask block:^{
         // convert pixel buffer to GL texture
         CVOpenGLESTextureRef inputTexture = [_glTextureCache createCVTextureFromImage:pixelBuffer width:width height:height planeIndex:0];
-        GLITexture *inputTextureInfo = [[GLITexture alloc] init];
-        inputTextureInfo.name = CVOpenGLESTextureGetName(inputTexture);
-        inputTextureInfo.target = CVOpenGLESTextureGetTarget(inputTexture);
-        inputTextureInfo.width = width;
-        inputTextureInfo.height = height;
-        [inputTextureInfo setTextureParameters];
+        GLITexture *inputTextureInfo = GLITextureNew(CVOpenGLESTextureGetTarget(inputTexture),
+                                                     CVOpenGLESTextureGetName(inputTexture),
+                                                     width,
+                                                     height);
         
         // create an interoperable render target
         if (!_frameRenderTarget
@@ -166,27 +223,19 @@
             _frameRenderTarget = [[GLIRenderTarget alloc] initWithSize:CGSizeMake(width, height) glTextureCache:_glTextureCache];
         }
         
-        // render using GL
+        // filter processing
         _filter.clearColor = [UIColor clearColor];
         _filter.inputTextures = @[inputTextureInfo];
         _filter.output = _frameRenderTarget;
-//        [_filter render];
+        [_filter render];
         
-        // wait GL finish
-        glFinish();
-        CVPixelBufferRef frameContentPixelBuffer = _frameRenderTarget.pixelBuffer;
-        CFRelease(inputTexture);
-        
-        GLITexture *frameContentTexture = [GLITexture new];
-        frameContentTexture.target = GL_TEXTURE_2D;
-        frameContentTexture.name = _frameRenderTarget.glTexture;
-        frameContentTexture.width = _frameRenderTarget.width;
-        frameContentTexture.height = _frameRenderTarget.height;
-        [frameContentTexture setTextureParameters];
-        _viewRenderer.inputTextures = @[inputTextureInfo];
+        // render texture to view
+        _viewRenderer.inputTextures = @[_frameRenderTarget.texture];
         [_viewRenderer renderToView:_glView isFlipped:YES];
+
         glFinish();
-    }];        
+        CFRelease(inputTexture);
+    }];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)output didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
@@ -194,7 +243,7 @@
     CMAttachmentMode mode = 0;
     CFStringRef reason = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_DroppedFrameReason, &mode);
     CFStringRef reasonInfo = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo, &mode);
-    //NSLog(@"Drop frame. Reason: %@, Reason Info: %@", (__bridge NSString *)reason, (__bridge NSString *)reasonInfo);
+    NSLog(@"Drop frame. Reason: %@, Reason Info: %@", (__bridge NSString *)reason, (__bridge NSString *)reasonInfo);
 }
 
 @end

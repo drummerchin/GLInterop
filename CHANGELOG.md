@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- *GLIContext* is no longer a singleton and not support `sharedContext`. It has new initializers to create a GL context object, and it has a method to safely run GL rendering codes by calling `runTaskWithHint:block:`.
+
+### Add
+
+- Add *GLIView* and *GLIViewRenderer*.
+- Add `GLITextureSetTexParameters()`, `GLITextureNew()` and `GLITextureNewTexture2D()`.
+
+### Fix
+
+- Fix issue that multiple input textures can not be set correctly while rendering in *GLIRenderer*.
+- Fix memory leak in *GLIBaseShapeRenderer*.
+- Fix missing texture filtering parameters setttings in *GLIBaseShapeRenderer* and *GLITransform*.
+
 # [1.5.2] - 2020-12-22
 
 ### GLIRenderer

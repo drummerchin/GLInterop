@@ -173,12 +173,10 @@
     [_glContext runTaskWithHint:GLITaskHint_ContextSpecificTask block:^{
         // convert pixel buffer to GL texture
         CVOpenGLESTextureRef inputTexture = [_glTextureCache createCVTextureFromImage:pixelBuffer width:width height:height planeIndex:0];
-        GLITexture *inputTextureInfo = [[GLITexture alloc] init];
-        inputTextureInfo.name = CVOpenGLESTextureGetName(inputTexture);
-        inputTextureInfo.target = CVOpenGLESTextureGetTarget(inputTexture);
-        inputTextureInfo.width = width;
-        inputTextureInfo.height = height;
-        [inputTextureInfo setTextureParameters];
+        GLITexture *inputTextureInfo = GLITextureNew(CVOpenGLESTextureGetTarget(inputTexture),
+                                                     CVOpenGLESTextureGetName(inputTexture),
+                                                     width,
+                                                     height);
         
         // create an interoperable render target
         if (!_frameRenderTarget
