@@ -53,7 +53,7 @@ GLI_EXPORT GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textu
 GLI_EXPORT GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height);
 
 /// Convenience method to create a texture 2d GLITexture.
-GLI_INLINE  GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height);
+GLI_EXPORT  GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height);
 
 @interface GLITexture : NSObject <GLITexture, NSCopying>
 
