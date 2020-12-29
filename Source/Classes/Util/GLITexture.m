@@ -110,4 +110,38 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
     glBindTexture(self.target, 0);
 }
 
+GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj)
+{
+    GLITextureSetTexParameters(textureObj,
+                               GLIMinFilter_Linear,
+                               GLIMagFilter_Linear,
+                               GLIAddressMode_ClampToEdge,
+                               GLIAddressMode_ClampToEdge);
+}
+
+GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj, GLIMinFilter minFilter, GLIMagFilter magFilter, GLIAddressMode wrapS, GLIAddressMode wrapT)
+{
+    glBindTexture(textureObj.target, textureObj.name);
+    glTexParameteri(textureObj.target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(minFilter));
+    glTexParameteri(textureObj.target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(magFilter));
+    glTexParameteri(textureObj.target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(wrapS));
+    glTexParameteri(textureObj.target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(wrapT));
+    glBindTexture(textureObj.target, 0);
+}
+
+GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height)
+{
+    GLITexture *texture = [GLITexture new];
+    texture.target = target;
+    texture.name = name;
+    texture.width = width;
+    texture.height = height;
+    return texture;
+}
+
+GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height)
+{
+    return GLITextureNew(GL_TEXTURE_2D, name, width, height);
+}
+
 @end

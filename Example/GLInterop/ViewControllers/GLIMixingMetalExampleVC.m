@@ -1,19 +1,19 @@
 //
-//  GLIViewController.m
+//  GLIMixingMetalExampleVC.m
 //  GLInterop
 //
 //  Created by Qin Hong on 05/29/2019.
 //  Copyright (c) 2019 Qin Hong. All rights reserved.
 //
 
-#import "GLIViewController.h"
+#import "GLIMixingMetalExampleVC.h"
 #import <OpenGLES/EAGL.h>
 #import <GLKit/GLKit.h>
 #import <MetalKit/MetalKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "GLInterop.h"
 
-@interface GLIViewController () <MTKViewDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface GLIMixingMetalExampleVC () <MTKViewDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 {
     AVCaptureSession *_captureSession;
     dispatch_queue_t _videoCaptureQueue;
@@ -25,8 +25,7 @@
     id _cvMetalTexture;
     id<MTLTexture> _lastTexture;
     
-    EAGLContext *_prevGLContext;
-    EAGLContext *_glContext;
+    GLIContext *_glContext;
     GLITextureCache *_glTextureCache;
     GLIMetalTextureCache *_metalTextureCache;
     GLIMetalRenderTarget *_frameRenderTarget;
@@ -36,13 +35,13 @@
 
 @end
 
-@implementation GLIViewController
+@implementation GLIMixingMetalExampleVC
 
 #pragma mark - life cycle
 
 - (void)dealloc
 {
-    [EAGLContext setCurrentContext:_prevGLContext];
+
 }
 
 - (void)viewDidLoad
@@ -67,15 +66,12 @@
     NSAssert(_renderQuadPipelineState, @"Failed create pipeline state.");
     
     // setup GL context
-    _glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    _glTextureCache = [[GLITextureCache alloc] initWithContext:_glContext];
+    _glContext = [[GLIContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    _glTextureCache = [[GLITextureCache alloc] initWithContext:_glContext.glContext];
     
-    _prevGLContext = [EAGLContext currentContext];
-    if ([EAGLContext currentContext] != _glContext)
-    {
-        [EAGLContext setCurrentContext:_glContext];
-    }
-    _filter = [[GLITransform alloc] init];
+    [_glContext runTaskWithHint:GLITaskHint_GenericTask block:^{
+        _filter = [[GLITransform alloc] init];
+    }];
 
     // setup camera
     [self setupCamera];
@@ -169,43 +165,38 @@
 {
     if (!CMSampleBufferIsValid(sampleBuffer)) return;
     
-    if ([EAGLContext currentContext] != _glContext)
-    {
-        [EAGLContext setCurrentContext:_glContext];
-    }
-
     // convert sample buffer to pixel buffer
     CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     size_t width = CVPixelBufferGetWidth(pixelBuffer);
     size_t height = CVPixelBufferGetHeight(pixelBuffer);
-    
-    // convert pixel buffer to GL texture
-    CVOpenGLESTextureRef inputTexture = [_glTextureCache createCVTextureFromImage:pixelBuffer width:width height:height planeIndex:0];
-    GLITexture *inputTextureInfo = [[GLITexture alloc] init];
-    inputTextureInfo.name = CVOpenGLESTextureGetName(inputTexture);
-    inputTextureInfo.target = CVOpenGLESTextureGetTarget(inputTexture);
-    inputTextureInfo.width = width;
-    inputTextureInfo.height = height;
-    [inputTextureInfo setTextureParameters];
 
-    // create an interoperable render target
-    if (!_frameRenderTarget
-        || _frameRenderTarget.width != width
-        || _frameRenderTarget.height != height)
-    {
-        _frameRenderTarget = [[GLIMetalRenderTarget alloc] initWithSize:CGSizeMake(width, height) glTextureCache:_glTextureCache mtlTextureCache:_metalTextureCache];
-    }
-    
-    // render using GL
-    _filter.clearColor = [UIColor clearColor];
-    _filter.inputTextures = @[inputTextureInfo];
-    _filter.output = _frameRenderTarget;
-    [_filter render];
-    
-    // wait GL finish
-    glFinish();
-    CFRelease(inputTexture);
-    
+    [_glContext runTaskWithHint:GLITaskHint_ContextSpecificTask block:^{
+        // convert pixel buffer to GL texture
+        CVOpenGLESTextureRef inputTexture = [_glTextureCache createCVTextureFromImage:pixelBuffer width:width height:height planeIndex:0];
+        GLITexture *inputTextureInfo = GLITextureNew(CVOpenGLESTextureGetTarget(inputTexture),
+                                                     CVOpenGLESTextureGetName(inputTexture),
+                                                     width,
+                                                     height);
+        
+        // create an interoperable render target
+        if (!_frameRenderTarget
+            || _frameRenderTarget.width != width
+            || _frameRenderTarget.height != height)
+        {
+            _frameRenderTarget = [[GLIMetalRenderTarget alloc] initWithSize:CGSizeMake(width, height) glTextureCache:_glTextureCache mtlTextureCache:_metalTextureCache];
+        }
+        
+        // render using GL
+        _filter.clearColor = [UIColor clearColor];
+        _filter.inputTextures = @[inputTextureInfo];
+        _filter.output = _frameRenderTarget;
+        [_filter render];
+        
+        // wait GL finish
+        glFinish();
+        CFRelease(inputTexture);
+    }];
+        
     // metal processing
     _cvMetalTexture = (__bridge_transfer id)[_metalTextureCache createCVTextureFromImage:_frameRenderTarget.pixelBuffer pixelFormat:MTLPixelFormatBGRA8Unorm width:_frameRenderTarget.width height:_frameRenderTarget.height planeIndex:0];
     _lastTexture = CVMetalTextureGetTexture((__bridge CVMetalTextureRef _Nonnull)_cvMetalTexture);

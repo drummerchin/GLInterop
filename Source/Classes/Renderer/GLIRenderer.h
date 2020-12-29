@@ -29,6 +29,10 @@ struct GLIFramebuffer
  @abstract  An renderer that used to render GL contents to an interoperable render target (aka *GLIRenderTarget*).
  */
 @interface GLIRenderer : NSObject
+{
+@protected
+    struct GLIFramebuffer _framebuffer;
+}
 
 /*!
  @abstract An boolean value that indicates whether to preserve existing contents of render target. Default value is NO.
@@ -92,6 +96,7 @@ struct GLIFramebuffer
 
 - (GLuint)program;
 - (BOOL)prepareFramebuffer;
+- (void)preprocessFramebuffer;
 - (void)setViewPortWithContentMode:(UIViewContentMode)contentMode inputSize:(CGSize)inputSize;
 - (void)applyVertexAttribute:(NSString *)attribName bytes:(void *)bytes __attribute__((deprecated("Use 'setVertexAttributeToBuffer:bytes:size:' instead.")));
 - (void)setVertexAttributeToBuffer:(NSString *)attribName bytes:(void *)bytes size:(size_t)size;
@@ -99,6 +104,12 @@ struct GLIFramebuffer
 - (void)setUniform:(NSString *)uniformName bytes:(void *)bytes;
 - (void)setTexture:(NSString *)textureName texture:(GLuint)glTexture;
 - (void)applyUniforms;
+
+@end
+
+@interface GLIRenderer (GLIUtils)
+
++ (CGRect)viewPortRectForContentMode:(UIViewContentMode)contentMode drawableSize:(CGSize)drawableSize textureSize:(CGSize)textureSize;
 
 @end
 

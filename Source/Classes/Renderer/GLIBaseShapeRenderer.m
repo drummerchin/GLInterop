@@ -92,6 +92,22 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
 
 @implementation GLIBaseShapeRenderer
 
+- (void)dealloc
+{
+    if (_textureQuadProgram)
+    {
+        GLIProgramDestroy(_textureQuadProgram);
+    }
+    if (_colorQuadProgram)
+    {
+        GLIProgramDestroy(_colorQuadProgram);
+    }
+    if (_pointProgram)
+    {
+        GLIProgramDestroy(_pointProgram);
+    }
+}
+
 - (instancetype)init
 {
     if (self = [super init])
@@ -340,6 +356,7 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
     
     GLIProgramSetUniformBytes(self.textureQuadProgram, "mvpMatrix", mvpMatrix);
     GLuint tex = texture.name;
+    GLITextureSetTexParameters(texture);
     GLIProgramSetUniformBytes(self.textureQuadProgram, "inputTexture", &tex);
     float uniformIntensity = (float)intensity;
     GLIProgramSetUniformBytes(self.textureQuadProgram, "intensity", &uniformIntensity);
