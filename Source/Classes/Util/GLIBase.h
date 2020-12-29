@@ -40,4 +40,13 @@
 #define GLI_EXTERN extern GLI_EXPORT
 #endif
 
+/*
+ * OVERLOADABLE
+ */
+#if __has_extension(attribute_overloadable)
+#define GLI_OVERLOADABLE __attribute__((__overloadable__))
+#else
+#define GLI_OVERLOADABLE
+#endif
+
 #endif /* GLIBase_h */

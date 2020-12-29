@@ -1,5 +1,5 @@
 //
-//  GLIViewController.h
+//  GLIViewRenderExampleVC.h
 //  GLInterop
 //
 //  Created by Qin Hong on 05/29/2019.
@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface GLIViewController : UIViewController
+@interface GLIViewRenderExampleVC : UIViewController
 
 @end

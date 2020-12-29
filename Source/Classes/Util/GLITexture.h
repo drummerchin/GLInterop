@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreVideo/CoreVideo.h>
+#import <GLInterop/GLIBase.h>
+#import <OpenGLES/ES2/gl.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,6 +40,20 @@ typedef enum : NSUInteger {
     GLIMagFilter_Linear,
     GLIMagFilter_Nearest,
 } GLIMagFilter;
+
+@class GLITexture;
+
+/// Convenience method to set texture filtering parameters using default value (linear/linear/clampToEdge/clampToEdge).
+GLI_EXPORT GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj);
+
+/// Convenience method to set texture filtering parameters.
+GLI_EXPORT GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj, GLIMinFilter minFilter, GLIMagFilter magFilter, GLIAddressMode wrapS, GLIAddressMode wrapT);
+
+/// Convenience method to create a GLITexture.
+GLI_EXPORT GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height);
+
+/// Convenience method to create a texture 2d GLITexture.
+GLI_INLINE  GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height);
 
 @interface GLITexture : NSObject <GLITexture, NSCopying>
 

@@ -37,7 +37,6 @@ const char * GLIDefaultVertexString = GLI_SHADER(
 @interface GLIRenderer ()
 {
     GLIProgramRef _prog;
-    struct GLIFramebuffer _framebuffer;
 }
 
 @end
@@ -223,13 +222,7 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         return NO;
     }
     
-    if (!self.preserveContents)
-    {
-        CGFloat clearColorR = 0, clearColorG = 0, clearColorB = 0, clearColorA = 0;
-        [self.clearColor getRed:&clearColorR green:&clearColorG blue:&clearColorB alpha:&clearColorA];
-        glClearColor(clearColorR, clearColorG, clearColorB, clearColorA);
-        glClear(GL_COLOR_BUFFER_BIT);
-    }
+    [self preprocessFramebuffer];
     
     return YES;
 }
@@ -261,7 +254,9 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         for (int i = 0; i < self.inputTextures.count; i++)
         {
             NSString *texIndexStr = (i == 0) ? @"" : [NSString stringWithFormat:@"%d", i];
-            [self setTexture:[NSString stringWithFormat:@"inputTexture%@", texIndexStr] texture:firstTexture.name];
+            id<GLITexture> texture = self.inputTextures[i];
+            GLITextureSetTexParameters(texture);
+            [self setTexture:[NSString stringWithFormat:@"inputTexture%@", texIndexStr] texture:texture.name];
         }
         
         [self applyUniforms];
@@ -293,6 +288,17 @@ const char * GLIDefaultVertexString = GLI_SHADER(
 {
     if (!_prog) return 0;
     return GLIProgramGetProgram(_prog);
+}
+
+- (void)preprocessFramebuffer
+{
+    if (!self.preserveContents)
+    {
+        CGFloat clearColorR = 0, clearColorG = 0, clearColorB = 0, clearColorA = 0;
+        [self.clearColor getRed:&clearColorR green:&clearColorG blue:&clearColorB alpha:&clearColorA];
+        glClearColor(clearColorR, clearColorG, clearColorB, clearColorA);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
 }
 
 - (void)setViewPortWithContentMode:(UIViewContentMode)contentMode inputSize:(CGSize)inputSize

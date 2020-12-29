@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "GLIBase.h"
 #import "GLIContext.h"
 #import "GLITexture.h"
 #import "GLITextureCache.h"
@@ -23,3 +24,7 @@
 #import "GLITransform.h"
 
 #import "GLISyncObject.h"
+
+#import "GLIRenderableSurfaceProtocol.h"
+#import "GLIViewRenderer.h"
+#import "GLIView.h"
