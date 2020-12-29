@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import <OpenGLES/EAGL.h>
-#import <GLInterop/GLIBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

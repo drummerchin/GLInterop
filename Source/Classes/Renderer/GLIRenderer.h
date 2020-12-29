@@ -96,6 +96,7 @@ struct GLIFramebuffer
 
 - (GLuint)program;
 - (BOOL)prepareFramebuffer;
+- (void)preprocessFramebuffer;
 - (void)setViewPortWithContentMode:(UIViewContentMode)contentMode inputSize:(CGSize)inputSize;
 - (void)applyVertexAttribute:(NSString *)attribName bytes:(void *)bytes __attribute__((deprecated("Use 'setVertexAttributeToBuffer:bytes:size:' instead.")));
 - (void)setVertexAttributeToBuffer:(NSString *)attribName bytes:(void *)bytes size:(size_t)size;

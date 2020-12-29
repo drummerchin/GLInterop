@@ -83,6 +83,8 @@ const char * GLITransformFragmentString = GLI_SHADER(
         GLIMatrixLoadOrthographic(orthoMatrix, -halfWidth, halfWidth, -halfHeight, halfHeight, -halfWidth, halfWidth);
         GLIMatrixMultiply(mvpMatrix, orthoMatrix, transformMatrix);
         [self setUniform:@"mvpMatrix" bytes:mvpMatrix];
+        
+        GLITextureSetTexParameters(firstTexture);
         [self setTexture:@"inputTexture" texture:firstTexture.name];
         [self applyUniforms];
         
