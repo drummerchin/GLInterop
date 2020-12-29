@@ -30,10 +30,11 @@ For the setting of the view port, *GLIRenderer* provides the following methods:
 For vertex attributes, *GLIRenderer* provides the following methods:
 
 ```
-- (void)applyVertexAttribute:(NSString *)attribName bytes:(void *)bytes;
+- (void)setVertexAttributeToBuffer:(NSString *)attribName bytes:(void *)bytes size:(size_t)size;
+- (void)applyVertexAttributes;
 ```
 
-For the above two methods, they touch GL instantly. And for uniform, the following methods will store the uniform value, and will not be passed to GL until the `applyUniforms` method is executed.
+For uniform, the following methods will store the uniform value, and will not be passed to GL until the `applyUniforms` method is executed.
 
 ```
 - (void)setUniform:(NSString *)uniformName bytes:(void *)bytes;
@@ -60,6 +61,20 @@ Now, this version provides a new way, you only need to define the property that 
 
 This code means that to set `blueTexture`,` intensity` and `stride` in the shader, you only need to define it without writing these implementations. Actually *GLIRenderer* will generate these uniform getters/setters at runtime.
 
+There're  variant renderers in this framework:
+
+#### GLIBaseShapeRenderer
+
+*GLIBaseShapeRenderer* is used to render GL primitives, like texture quad, points, lines and triangle strips.
+
+#### GLIViewRenderer
+
+*GLIViewRenderer* is used to render a GL texture to a renderable surface which conforms to `GLIRenderableSurface` protocol (eg. *GLIView*).
+
+#### GLITransform
+
+*GLITransform*  can apply a transform to it's input texture and render it to a output which specific a given size. It can be used for resizing, cropping, flipping content etc.
+
 ### Utils
 
 - GLIContext
@@ -67,6 +82,11 @@ This code means that to set `blueTexture`,` intensity` and `stride` in the shade
 - GLIMetalTextureCache
 - GLIPixelBufferPool
 - GLITexture
+- GLISyncObject
+
+### GLIView
+
+*GLIView* is a pure view which conforms to *GLIRenderableSurface* protocol to be a renderable surface. There're no GL API calls in its implementation, which can avoid context management problems.
 
 ## Example
 
