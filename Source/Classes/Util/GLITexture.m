@@ -7,6 +7,7 @@
 
 #import "GLITexture.h"
 #import <OpenGLES/ES2/gl.h>
+#import <GLKit/GLKit.h>
 
 static const GLint glValueFromMinFilter(GLIMinFilter minFilter)
 {
@@ -39,6 +40,100 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
         default: break;
     }
     return (GLint)ret;
+}
+
+#pragma mark -
+GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj)
+{
+    GLITextureSetTexParameters(textureObj,
+                               GLIMinFilter_Linear,
+                               GLIMagFilter_Linear,
+                               GLIAddressMode_ClampToEdge,
+                               GLIAddressMode_ClampToEdge);
+}
+
+GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj, GLIMinFilter minFilter, GLIMagFilter magFilter, GLIAddressMode wrapS, GLIAddressMode wrapT)
+{
+    if (!textureObj) return;
+    glBindTexture(textureObj.target, textureObj.name);
+    glTexParameteri(textureObj.target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(minFilter));
+    glTexParameteri(textureObj.target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(magFilter));
+    glTexParameteri(textureObj.target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(wrapS));
+    glTexParameteri(textureObj.target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(wrapT));
+    glBindTexture(textureObj.target, 0);
+}
+
+GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height)
+{
+    GLITexture *texture = [GLITexture new];
+    texture.target = target;
+    texture.name = name;
+    texture.width = width;
+    texture.height = height;
+    return texture;
+}
+
+GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height)
+{
+    return GLITextureNew(GL_TEXTURE_2D, name, width, height);
+}
+
+NSDictionary *GLITextureLoadOptionNew(BOOL premultiplyAlpha, BOOL mipmap, BOOL bottomLeftOrigin, BOOL grayScaleAsAlpha, BOOL sRGB)
+{
+    return @{
+        GLKTextureLoaderApplyPremultiplication: @(premultiplyAlpha),
+        GLKTextureLoaderGenerateMipmaps: @(mipmap),
+        GLKTextureLoaderOriginBottomLeft: @(bottomLeftOrigin),
+        GLKTextureLoaderGrayscaleAsAlpha: @(grayScaleAsAlpha),
+        GLKTextureLoaderSRGB: @(sRGB),
+    };
+}
+
+NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionPremultiply(void)
+{
+    return GLITextureLoadOptionNew(YES, NO, NO, NO, NO);
+}
+
+NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionPremultiplyFlipped(void)
+{
+    return GLITextureLoadOptionNew(YES, NO, YES, NO, NO);
+}
+
+NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionNonPremultiplyFlipped(void)
+{
+    return GLITextureLoadOptionNew(NO, NO, YES, NO, NO);
+}
+
+id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
+{
+    NSError *error = nil;
+    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfURL:URL options:options error:&error];
+    if (error)
+    {
+        textureInfo = [GLKTextureLoader textureWithContentsOfURL:URL options:options error:&error];
+        if (error)
+        {
+            if (outError) *outError = error;
+            return nil;
+        }
+    }
+    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height);
+}
+
+id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
+{
+    NSError *error = nil;
+    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:&error];
+    if (error)
+    {
+        textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:&error];
+        if (error)
+        {
+            if (outError) *outError = error;
+            return nil;
+        }
+    }
+    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height);
 }
 
 @implementation GLITexture
@@ -108,40 +203,6 @@ static const GLint glValueFromAddressMode(GLIAddressMode addressMode)
     glBindTexture(self.target, self.name);
     glTexImage2D(self.target, 0, GL_RGBA, (GLsizei)self.width, (GLsizei)self.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     glBindTexture(self.target, 0);
-}
-
-GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj)
-{
-    GLITextureSetTexParameters(textureObj,
-                               GLIMinFilter_Linear,
-                               GLIMagFilter_Linear,
-                               GLIAddressMode_ClampToEdge,
-                               GLIAddressMode_ClampToEdge);
-}
-
-GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj, GLIMinFilter minFilter, GLIMagFilter magFilter, GLIAddressMode wrapS, GLIAddressMode wrapT)
-{
-    glBindTexture(textureObj.target, textureObj.name);
-    glTexParameteri(textureObj.target, GL_TEXTURE_MIN_FILTER, glValueFromMinFilter(minFilter));
-    glTexParameteri(textureObj.target, GL_TEXTURE_MAG_FILTER, glValueFromMagFilter(magFilter));
-    glTexParameteri(textureObj.target, GL_TEXTURE_WRAP_S, glValueFromAddressMode(wrapS));
-    glTexParameteri(textureObj.target, GL_TEXTURE_WRAP_T, glValueFromAddressMode(wrapT));
-    glBindTexture(textureObj.target, 0);
-}
-
-GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height)
-{
-    GLITexture *texture = [GLITexture new];
-    texture.target = target;
-    texture.name = name;
-    texture.width = width;
-    texture.height = height;
-    return texture;
-}
-
-GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height)
-{
-    return GLITextureNew(GL_TEXTURE_2D, name, width, height);
 }
 
 @end
