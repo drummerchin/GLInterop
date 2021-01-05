@@ -129,7 +129,7 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
     
     glEnable(GL_BLEND);
     glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
     glViewport(0, 0, (GLsizei)_renderTarget.width, (GLsizei)_renderTarget.height);
 }
@@ -161,6 +161,7 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
 
 - (void)endRender
 {
+    glDisable(GL_BLEND);
     _renderTarget = nil;
     GLI_UNLOCK(_drawLock);
 }
