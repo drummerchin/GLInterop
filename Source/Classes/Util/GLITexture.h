@@ -55,6 +55,18 @@ GLI_EXPORT GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, s
 /// Convenience method to create a texture 2d GLITexture.
 GLI_EXPORT  GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height);
 
+/// New a dictionary with given options.
+GLI_EXPORT NSDictionary<NSString*, NSNumber*> *GLITextureLoadOptionNew(BOOL premultiplyAlpha, BOOL mipmap, BOOL bottomLeftOrigin, BOOL grayScaleAsAlpha, BOOL sRGB);
+GLI_EXPORT NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionPremultiply(void);
+GLI_EXPORT NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionPremultiplyFlipped(void);
+GLI_EXPORT NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionNonPremultiplyFlipped(void);
+
+/// Synchronously load an image from URL into GLITexture.
+GLI_EXPORT id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+
+/// Synchronously load an image form file path into GLITexture.
+GLI_EXPORT id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+
 @interface GLITexture : NSObject <GLITexture, NSCopying>
 
 /*!
