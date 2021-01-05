@@ -195,10 +195,7 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         
         _framebuffer.target = GL_FRAMEBUFFER;
         glGenFramebuffers(1, &_framebuffer.name);
-        
-        glEnable(GL_TEXTURE_2D);
-        glDisable(GL_DEPTH_TEST);
-        
+                
         self.preserveContents = NO;
         self.clearColor = [UIColor clearColor];
     }
