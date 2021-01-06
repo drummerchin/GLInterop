@@ -40,7 +40,10 @@
 
 - (void)dealloc
 {
-
+    [_glContext runTaskWithHint:GLITaskHint_GenericTask block:^{
+        [_filter removeResources];
+        [_viewRenderer removeResources];
+    }];
 }
 
 - (void)viewDidLoad
