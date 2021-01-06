@@ -116,7 +116,7 @@ GLI_EXPORT id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDicti
 /*!
  @abstract A boolean value that indicate whether delete the texture when the receiver is deallocating. Default is NO.
  */
-@property (nonatomic) BOOL deleteTextureWhileDeallocating;
+@property (nonatomic) BOOL deleteTextureWhileDeallocating __deprecated;
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
