@@ -19,9 +19,15 @@
 
 - (void)dealloc
 {
+    NSCAssert(!_sync, @"GL objects leaked.");
+}
+
+- (void)removeResources
+{
     if (_sync)
     {
         glDeleteSyncAPPLE(_sync);
+        _sync = 0;
     }
 }
 

@@ -28,6 +28,17 @@
 
 - (void)dealloc
 {
+    NSCAssert(!_texture.name && !_framebuffer.name, @"GL objects leaked.");
+}
+
+- (void)removeResources
+{
+    if (_texture.name)
+    {
+        GLuint tex = _texture.name;
+        glDeleteTextures(1, &tex);
+        _texture.name = 0;
+    }
     if (_framebuffer.name)
     {
         glDeleteFramebuffers(1, &_framebuffer.name);
@@ -44,7 +55,6 @@
         self.height = height;
         
         _texture = [GLITexture new];
-        _texture.deleteTextureWhileDeallocating = YES;
         _texture.target = GL_TEXTURE_2D;
         GLuint tex = 0;
         glGenTextures(1, &tex);
