@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `removeResources` in *GLIFramebufferTextureRenderTarget*, *GLIBaseShapeRenderer*, *GLIRenderer* and *GLISyncObject* to avoid GL objects leaks while deallocating in a invalid GL context-specific thread.
+
+### Deprecated
+
+- Deprecate `deleteTextureWhileDeallocating` in *GLITexture* to adopt to the new management for GL objects.
+
 # [1.5.4] - 2021-01-05
 
 ### Added

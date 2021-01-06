@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Update fence for next rendering.
 - (void)update;
 
+/// Remove GL resources.
+- (void)removeResources;
+
 @end
 
 NS_ASSUME_NONNULL_END
