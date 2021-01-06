@@ -94,17 +94,28 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
 
 - (void)dealloc
 {
+    NSCAssert(!_textureQuadProgram
+              && !_colorQuadProgram
+              && !_pointProgram,
+              @"GL objects leaked.");
+}
+
+- (void)removeResources
+{
     if (_textureQuadProgram)
     {
         GLIProgramDestroy(_textureQuadProgram);
+        _textureQuadProgram = NULL;
     }
     if (_colorQuadProgram)
     {
         GLIProgramDestroy(_colorQuadProgram);
+        _colorQuadProgram = NULL;
     }
     if (_pointProgram)
     {
         GLIProgramDestroy(_pointProgram);
+        _pointProgram = NULL;
     }
 }
 

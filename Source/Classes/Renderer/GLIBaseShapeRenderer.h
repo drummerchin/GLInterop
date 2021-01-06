@@ -16,6 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GLIBaseShapeRenderer : NSObject
 
 /*!
+ @abstract Remove GL resources.
+ */
+- (void)removeResources;
+
+/*!
  @abstract Begin render to the render target.
  */
 - (void)beginRender:(id<GLIRenderTarget>)renderTarget;

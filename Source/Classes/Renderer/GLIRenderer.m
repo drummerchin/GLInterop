@@ -162,9 +162,15 @@ const char * GLIDefaultVertexString = GLI_SHADER(
 
 - (void)dealloc
 {
+    NSCAssert(!_prog && !_framebuffer.name, @"GL objects leaked.");
+}
+
+- (void)removeResources
+{
     if (_prog)
     {
         GLIProgramDestroy(_prog);
+        _prog = NULL;
     }
     if (_framebuffer.name)
     {

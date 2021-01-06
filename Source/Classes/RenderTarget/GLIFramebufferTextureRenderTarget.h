@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)prepareFramebuffer;
 
+/*!
+ @abstract Remove GL resources.
+ */
+- (void)removeResources;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -82,6 +82,11 @@ struct GLIFramebuffer
  */
 - (void)waitUntilCompleted;
 
+/*!
+ @abstract Remove GL resources.
+ */
+- (void)removeResources;
+
 @end
 
 @interface GLIRenderer (GLISubclassingHooks)
