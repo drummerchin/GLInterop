@@ -52,23 +52,12 @@
     return self;
 }
 
-/*
-- (void)applicationWillResignActive:(NSNotification *)notification
-{
-    glFinish();
-}
-
-- (void)applicationDidEnterBackground:(NSNotification *)notification
-{
-    glFinish();
-}
-//*/
-
 - (instancetype)initWithAPI:(EAGLRenderingAPI)api
 {
     if (self = [super init])
     {
         _glContext = [[EAGLContext alloc] initWithAPI:api];
+        if (!_glContext) return nil;
         
         pthread_mutexattr_init(&_attr);
         pthread_mutexattr_settype(&_attr, PTHREAD_MUTEX_RECURSIVE);
@@ -82,7 +71,8 @@
     if (self = [super init])
     {
         _glContext = [[EAGLContext alloc] initWithAPI:api sharegroup:sharegroup];
-        
+        if (!_glContext) return nil;
+
         pthread_mutexattr_init(&_attr);
         pthread_mutexattr_settype(&_attr, PTHREAD_MUTEX_RECURSIVE);
         pthread_mutex_init(&_lock, &_attr);
