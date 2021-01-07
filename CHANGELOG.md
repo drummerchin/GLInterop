@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix GL object leaks in *GLIViewRenderer*.
+- Fix nullabilities issue of initializers in *GLIContext*.
+
 # [1.6.0] - 2021-01-06
 
 ### Added
