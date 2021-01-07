@@ -33,6 +33,21 @@ static GLfloat const kFlippedTexCoordData[] = {
 
 @implementation GLIViewRenderer
 
+- (void)dealloc
+{
+    NSCAssert(!_renderbuffer, @"GL objects leaked.");
+}
+
+- (void)removeResources
+{
+    if (_renderbuffer)
+    {
+        glDeleteRenderbuffers(1, &_renderbuffer);
+        _renderbuffer = 0;
+    }
+    [super removeResources];
+}
+
 - (instancetype)init
 {
     NSString *fragment = @GLI_SHADER
