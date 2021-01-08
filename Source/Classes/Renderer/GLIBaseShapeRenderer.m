@@ -336,12 +336,6 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
         -1.0 * halfW,  1.0 * halfH, 0.0, 1.0,
          1.0 * halfW,  1.0 * halfH, 0.0, 1.0
     };
-    GLfloat texCoords[] = {
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f
-    };
     
     float targetWidth = _renderTarget.width;
     float targetHeight = _renderTarget.height;
@@ -363,7 +357,7 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
                           m.columns[0].w, m.columns[1].w, m.columns[2].w, m.columns[3].w);
         
     GLIProgramSetVertexAttributeToBuffer(self.textureQuadProgram, "position", positions, sizeof(float) * 16);
-    GLIProgramSetVertexAttributeToBuffer(self.textureQuadProgram, "texCoord", texCoords, sizeof(float) * 8);
+    GLIProgramSetVertexAttributeToBuffer(self.textureQuadProgram, "texCoord", (void *)(texture.isFlipped ? kGLIQuad_TexCoordFlipped : kGLIQuad_TexCoord), sizeof(float) * 8);
     GLIProgramApplyVertexAttributes(self.textureQuadProgram);
     
     GLIProgramSetUniformBytes(self.textureQuadProgram, "mvpMatrix", mvpMatrix);
@@ -396,12 +390,6 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
         -1.0 * halfW,  1.0 * halfH, 0.0, 1.0,
          1.0 * halfW,  1.0 * halfH, 0.0, 1.0
     };
-    GLfloat texCoords[] = {
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f
-    };
     
     float targetWidth = _renderTarget.width;
     float targetHeight = _renderTarget.height;
@@ -423,7 +411,7 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
                           m.columns[0].w, m.columns[1].w, m.columns[2].w, m.columns[3].w);
         
     GLIProgramSetVertexAttributeToBuffer(self.colorQuadProgram, "position", positions, sizeof(float) * 16);
-    GLIProgramSetVertexAttributeToBuffer(self.colorQuadProgram, "texCoord", texCoords, sizeof(float) * 8);
+    GLIProgramSetVertexAttributeToBuffer(self.colorQuadProgram, "texCoord", (void *)kGLIQuad_TexCoord, sizeof(float) * 8);
     GLIProgramApplyVertexAttributes(self.colorQuadProgram);
 
     GLIProgramSetUniformBytes(self.colorQuadProgram, "mvpMatrix", mvpMatrix);

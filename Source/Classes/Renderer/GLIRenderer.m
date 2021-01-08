@@ -11,6 +11,36 @@
 #include "GLIMatrixUtil.h"
 #import <objc/runtime.h>
 
+GLfloat const kGLIQuad_Position[] = {
+    -1.0, -1.0, 0.0, 1.0,
+     1.0, -1.0, 0.0, 1.0,
+    -1.0,  1.0, 0.0, 1.0,
+     1.0,  1.0, 0.0, 1.0
+};
+
+GLfloat const kGLIQuad_TexCoord[] = {
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    0.0f, 1.0f,
+    1.0f, 1.0f
+};
+
+GLfloat const kGLIQuad_TexCoordFlipped[] = {
+    0.0f, 1.0f,
+    1.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f
+};
+
+CGRect GLIViewPort(CGRect rect, CGSize RTSize, BOOL flipped)
+{
+    if (!flipped) return rect;
+    return CGRectMake(rect.origin.x,
+                      RTSize.height - rect.origin.y - rect.size.height,
+                      rect.size.width,
+                      rect.size.height);
+}
+
 void GLIRendererAddMedhod(Class clz, SEL sel, id _Nonnull block)
 {
     IMP impl = imp_implementationWithBlock(block);
@@ -239,18 +269,8 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         glUseProgram(self.program);
         [self setViewPortWithContentMode:UIViewContentModeScaleAspectFit inputSize:CGSizeMake(firstTexture.width, firstTexture.height)];
         
-        [self setVertexAttributeToBuffer:@"position" bytes:&(GLfloat[]){
-            -1.0, -1.0, 0.0, 1.0,
-             1.0, -1.0, 0.0, 1.0,
-            -1.0,  1.0, 0.0, 1.0,
-             1.0,  1.0, 0.0, 1.0
-        } size:sizeof(float) * 16];
-        [self setVertexAttributeToBuffer:@"texCoord" bytes:&(GLfloat[]){
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            0.0f, 1.0f,
-            1.0f, 1.0f
-        } size:sizeof(float) * 8];
+        [self setVertexAttributeToBuffer:@"position" bytes:(void *)kGLIQuad_Position size:sizeof(float) * 16];
+        [self setVertexAttributeToBuffer:@"texCoord" bytes:(void *)(firstTexture.isFlipped ? kGLIQuad_TexCoordFlipped : kGLIQuad_TexCoord) size:sizeof(float) * 8];
         
         [self applyVertexAttributes];
         
@@ -304,12 +324,17 @@ const char * GLIDefaultVertexString = GLI_SHADER(
     }
 }
 
+- (void)setViewPort:(CGRect)viewPort
+{
+    glViewport(viewPort.origin.x, viewPort.origin.y, viewPort.size.width, viewPort.size.height);
+}
+
 - (void)setViewPortWithContentMode:(UIViewContentMode)contentMode inputSize:(CGSize)inputSize
 {
     CGRect viewPort = [self.class viewPortRectForContentMode:contentMode
                                                 drawableSize:CGSizeMake(self.output.width, self.output.height)
                                                  textureSize:inputSize];
-    glViewport(viewPort.origin.x, viewPort.origin.y, viewPort.size.width, viewPort.size.height);
+    [self setViewPort:viewPort];
 }
 
 - (void)applyVertexAttribute:(NSString *)attribName bytes:(void *)bytes
