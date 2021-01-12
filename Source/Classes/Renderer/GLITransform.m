@@ -62,12 +62,7 @@ const char * GLITransformFragmentString = GLI_SHADER(
             -1.0 * halfWidth,  1.0 * halfHeight, 0.0, 1.0,
             1.0 * halfWidth,   1.0 * halfHeight, 0.0, 1.0
         } size:sizeof(float) * 16];
-        [self setVertexAttributeToBuffer:@"texCoord" bytes:&(GLfloat[]){
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            0.0f, 1.0f,
-            1.0f, 1.0f
-        } size:sizeof(float) * 8];
+        [self setVertexAttributeToBuffer:@"texCoord" bytes:(void *)(firstTexture.isFlipped ? kGLIQuad_TexCoordFlipped : kGLIQuad_TexCoord) size:sizeof(float) * 8];
         
         [self applyVertexAttributes];
         

@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
-- (void)renderToView:(id<GLIRenderableSurface>)renderableSurface isFlipped:(BOOL)isFlipped;
+- (void)renderToView:(id<GLIRenderableSurface>)renderableSurface isFlipped:(BOOL)isFlipped __deprecated;
+- (void)renderToView:(id<GLIRenderableSurface>)renderableSurface;
 
 GLI_RENDERER_INITIALIZER_UNAVAILABLE
 

@@ -18,12 +18,11 @@ typedef enum : NSUInteger {
 @interface GLIContext : NSObject
 
 @property (nonatomic, strong, readonly) EAGLContext *glContext;
-@property (nonatomic) int debugLevel;
 
 + (instancetype)sharedContext __deprecated;
 
-- (instancetype)initWithAPI:(EAGLRenderingAPI)api NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithAPI:(EAGLRenderingAPI)api sharegroup:(EAGLSharegroup*)sharegroup NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithAPI:(EAGLRenderingAPI)api NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithAPI:(EAGLRenderingAPI)api sharegroup:(EAGLSharegroup*)sharegroup NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)new NS_UNAVAILABLE;
 

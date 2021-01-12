@@ -102,6 +102,7 @@ struct GLIFramebuffer
 - (GLuint)program;
 - (BOOL)prepareFramebuffer;
 - (void)preprocessFramebuffer;
+- (void)setViewPort:(CGRect)viewPort;
 - (void)setViewPortWithContentMode:(UIViewContentMode)contentMode inputSize:(CGSize)inputSize;
 - (void)applyVertexAttribute:(NSString *)attribName bytes:(void *)bytes __attribute__((deprecated("Use 'setVertexAttributeToBuffer:bytes:size:' instead.")));
 - (void)setVertexAttributeToBuffer:(NSString *)attribName bytes:(void *)bytes size:(size_t)size;
@@ -117,6 +118,12 @@ struct GLIFramebuffer
 + (CGRect)viewPortRectForContentMode:(UIViewContentMode)contentMode drawableSize:(CGSize)drawableSize textureSize:(CGSize)textureSize;
 
 @end
+
+GLI_EXTERN GLfloat const kGLIQuad_Position[16];
+GLI_EXTERN GLfloat const kGLIQuad_TexCoord[8];
+GLI_EXTERN GLfloat const kGLIQuad_TexCoordFlipped[8];
+
+GLI_EXTERN CGRect GLIViewPort(CGRect rect, CGSize RTSize, BOOL flipped);
 
 #define GLI_RENDERER_INITIALIZER_UNAVAILABLE \
 - (instancetype)initWithVertex:(NSString * _Nullable)vertex fragment:(NSString * _Nullable)fragment NS_UNAVAILABLE;
