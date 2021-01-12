@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) GLuint name;
 @property (nonatomic, readonly) size_t width;
 @property (nonatomic, readonly) size_t height;
+@property (nonatomic, readonly) BOOL isFlipped;
 
 @end
 
@@ -50,10 +51,12 @@ GLI_EXPORT GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textu
 GLI_EXPORT GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj, GLIMinFilter minFilter, GLIMagFilter magFilter, GLIAddressMode wrapS, GLIAddressMode wrapT);
 
 /// Convenience method to create a GLITexture.
-GLI_EXPORT GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height);
+GLI_EXPORT GLI_OVERLOADABLE GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height);
+GLI_EXPORT GLI_OVERLOADABLE GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height, BOOL flipped);
 
 /// Convenience method to create a texture 2d GLITexture.
-GLI_EXPORT  GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height);
+GLI_EXPORT GLI_OVERLOADABLE GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height);
+GLI_EXPORT GLI_OVERLOADABLE GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height, BOOL flipped);
 
 /// New a dictionary with given options.
 GLI_EXPORT NSDictionary<NSString*, NSNumber*> *GLITextureLoadOptionNew(BOOL premultiplyAlpha, BOOL mipmap, BOOL bottomLeftOrigin, BOOL grayScaleAsAlpha, BOOL sRGB);
@@ -88,6 +91,11 @@ GLI_EXPORT id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDicti
  @abstract The height of the texture.
  */
 @property (nonatomic) size_t height;
+
+/*!
+ @abstract A boolean value that indicates wheather the content of texture is vertical flipped.
+ */
+@property (nonatomic) BOOL isFlipped;
 
 /*!
  @abstract Default is GLIMinFilter_Linear.

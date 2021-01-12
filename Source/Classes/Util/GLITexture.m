@@ -63,19 +63,30 @@ GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj, GLIM
     glBindTexture(textureObj.target, 0);
 }
 
-GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height)
+GLI_OVERLOADABLE GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height, BOOL flipped)
 {
     GLITexture *texture = [GLITexture new];
     texture.target = target;
     texture.name = name;
     texture.width = width;
     texture.height = height;
+    texture.isFlipped = flipped;
     return texture;
 }
 
-GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height)
+GLI_OVERLOADABLE GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height)
 {
-    return GLITextureNew(GL_TEXTURE_2D, name, width, height);
+    return GLITextureNew(target, name, width, height, NO);
+}
+
+GLI_OVERLOADABLE GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height)
+{
+    return GLITextureNew(GL_TEXTURE_2D, name, width, height, NO);
+}
+
+GLI_OVERLOADABLE GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height, BOOL flipped)
+{
+    return GLITextureNew(GL_TEXTURE_2D, name, width, height, flipped);
 }
 
 NSDictionary *GLITextureLoadOptionNew(BOOL premultiplyAlpha, BOOL mipmap, BOOL bottomLeftOrigin, BOOL grayScaleAsAlpha, BOOL sRGB)
@@ -117,7 +128,8 @@ id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumbe
             return nil;
         }
     }
-    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height);
+    BOOL isFlipped = textureInfo.textureOrigin == GLKTextureInfoOriginTopLeft ? YES : NO;
+    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height, isFlipped);
 }
 
 id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
@@ -133,7 +145,8 @@ id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSStr
             return nil;
         }
     }
-    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height);
+    BOOL isFlipped = textureInfo.textureOrigin == GLKTextureInfoOriginTopLeft ? YES : NO;
+    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height, isFlipped);
 }
 
 @implementation GLITexture

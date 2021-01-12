@@ -7,10 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Support flipped texture by specifing `isFlipped` of *GLITexture* used in *GLIRenderer*, *GLIBaseShapeRenderer*, *GLIViewRenderer* and *GLITransform*.
+
+### Added
+
+- Add `isFlipped` in *GLITexture* protocol to support flipped texture.
+- Add overloadable `GLITextureNew()` and `GLITextureNewTexture2D()` to support flipped texture.
+
 ### Fixed
 
 - Fix GL object leaks in *GLIViewRenderer*.
 - Fix nullabilities issue of initializers in *GLIContext*.
+
+### Deprecated
+
+- Deprecate `renderToView:isFlipped:` of *GLIViewRenderer*, use `renderToView:` instead.
 
 # [1.6.0] - 2021-01-06
 
