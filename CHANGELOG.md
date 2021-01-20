@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add overloadable `GLITextureLoadFromURL()` and `GLITextureLoadFromFilePath()`.
+
+### Changed
+
+- *GLIRenderer*, *GLIBaseShapeRenderer* and *GLITransform* now support flipped GL texture of render target.
+
+### Deprecated
+
+- Deprecate `initWithWithCVPixelBuffer:` in *GLIRenderTarget*, use `initWithWithCVPixelBuffer:glTextureCache:` instead.
+- Deprecate `initWithSize:` in *GLIRenderTarget*, use `initWithSize:glTextureCache:` instead.
+- Deprecate singleton method `sharedTextureCache` in *GLITextureCache* and *GLIMetalTextureCache*.
+
+### Fixed
+
+- Fix incorrect `isFlipped` property of `texture` in *GLIRenderTarget*.
+
 # [1.6.1] - 2021-01-12
 
 ### Changed
