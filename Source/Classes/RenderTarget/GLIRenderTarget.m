@@ -22,6 +22,7 @@
 @property (nonatomic) NSUInteger width;
 @property (nonatomic) NSUInteger height;
 @property (nonatomic) GLuint glTexture;
+@property (nonatomic) BOOL glTextureIsFlipped;
 @property (nonatomic, strong) GLITextureCache *glTextureCache;
 
 @end
@@ -53,6 +54,7 @@
         if (_cvTexture)
         {
             self.glTexture = CVOpenGLESTextureGetName((__bridge CVOpenGLESTextureRef)_cvTexture);
+            self.glTextureIsFlipped = CVOpenGLESTextureIsFlipped((__bridge CVOpenGLESTextureRef)_cvTexture);
         }
     }
     return self;
@@ -89,6 +91,7 @@
         _cvTexture = (__bridge_transfer id)[self.glTextureCache createCVTextureFromImage:(__bridge CVImageBufferRef _Nonnull)_cvPixelBuffer width:self.width height:self.height planeIndex:0];
         if (!_cvTexture) return nil;
         self.glTexture = CVOpenGLESTextureGetName((__bridge CVOpenGLESTextureRef)_cvTexture);;
+        self.glTextureIsFlipped = CVOpenGLESTextureIsFlipped((__bridge CVOpenGLESTextureRef)_cvTexture);
     }
     return self;
 }
@@ -114,6 +117,7 @@
         _texture.name = self.glTexture;
         _texture.width = self.width;
         _texture.height = self.height;
+        _texture.isFlipped = self.glTextureIsFlipped;
     }
     return _texture;
 }
