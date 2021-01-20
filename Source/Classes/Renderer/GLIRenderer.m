@@ -18,6 +18,13 @@ GLfloat const kGLIQuad_Position[] = {
      1.0,  1.0, 0.0, 1.0
 };
 
+GLfloat const kGLIQuad_PositionFlipped[] = {
+    -1.0, 1.0, 0.0, 1.0,
+     1.0, 1.0, 0.0, 1.0,
+    -1.0, -1.0, 0.0, 1.0,
+     1.0, -1.0, 0.0, 1.0
+};
+
 GLfloat const kGLIQuad_TexCoord[] = {
     0.0f, 0.0f,
     1.0f, 0.0f,
@@ -269,9 +276,9 @@ const char * GLIDefaultVertexString = GLI_SHADER(
         glUseProgram(self.program);
         [self setViewPortWithContentMode:UIViewContentModeScaleAspectFit inputSize:CGSizeMake(firstTexture.width, firstTexture.height)];
         
-        [self setVertexAttributeToBuffer:@"position" bytes:(void *)kGLIQuad_Position size:sizeof(float) * 16];
+        [self setVertexAttributeToBuffer:@"position" bytes:(void *)(self.output.texture.isFlipped ? kGLIQuad_PositionFlipped : kGLIQuad_Position) size:sizeof(float) * 16];
         [self setVertexAttributeToBuffer:@"texCoord" bytes:(void *)(firstTexture.isFlipped ? kGLIQuad_TexCoordFlipped : kGLIQuad_TexCoord) size:sizeof(float) * 8];
-        
+
         [self applyVertexAttributes];
         
         for (int i = 0; i < self.inputTextures.count; i++)

@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @abstract Return a singleton instance with a shared device.
  */
-+ (instancetype)sharedTextureCache;
++ (instancetype)sharedTextureCache __deprecated;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

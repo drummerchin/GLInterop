@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  @method initWithWithCVPixelBuffer:
  @abstract Initialize instance from a given pixel buffer and a shared GLITextureCache.
  */
-- (instancetype)initWithWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer;
+- (instancetype)initWithWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer __attribute__((deprecated("Use 'initWithWithCVPixelBuffer:glTextureCache:' instead.")));
 
 /*!
  @method initWithSize:glTextureCache:
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  @method initWithSize:
  @abstract Initialize instance from a given size a shared GLITextureCache.
  */
-- (instancetype)initWithSize:(CGSize)size;
+- (instancetype)initWithSize:(CGSize)size __attribute__((deprecated("Use 'initWithSize:glTextureCache:' instead.")));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

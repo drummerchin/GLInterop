@@ -115,7 +115,7 @@ NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionNonPremultiplyFli
     return GLITextureLoadOptionNew(NO, NO, YES, NO, NO);
 }
 
-id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
+GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
 {
     NSError *error = nil;
     GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfURL:URL options:options error:&error];
@@ -132,7 +132,23 @@ id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumbe
     return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height, isFlipped);
 }
 
-id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
+GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped)
+{
+    NSError *error = nil;
+    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfURL:URL options:options error:&error];
+    if (error)
+    {
+        textureInfo = [GLKTextureLoader textureWithContentsOfURL:URL options:options error:&error];
+        if (error)
+        {
+            if (outError) *outError = error;
+            return nil;
+        }
+    }
+    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height, isFlipped);
+}
+
+GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
 {
     NSError *error = nil;
     GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:&error];
@@ -146,6 +162,22 @@ id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSStr
         }
     }
     BOOL isFlipped = textureInfo.textureOrigin == GLKTextureInfoOriginTopLeft ? YES : NO;
+    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height, isFlipped);
+}
+
+GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped)
+{
+    NSError *error = nil;
+    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:&error];
+    if (error)
+    {
+        textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:&error];
+        if (error)
+        {
+            if (outError) *outError = error;
+            return nil;
+        }
+    }
     return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height, isFlipped);
 }
 

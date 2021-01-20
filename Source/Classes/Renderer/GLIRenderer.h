@@ -120,6 +120,7 @@ struct GLIFramebuffer
 @end
 
 GLI_EXTERN GLfloat const kGLIQuad_Position[16];
+GLI_EXTERN GLfloat const kGLIQuad_PositionFlipped[16];
 GLI_EXTERN GLfloat const kGLIQuad_TexCoord[8];
 GLI_EXTERN GLfloat const kGLIQuad_TexCoordFlipped[8];
 

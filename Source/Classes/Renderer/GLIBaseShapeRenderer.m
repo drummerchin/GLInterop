@@ -347,7 +347,9 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
     matrix_float4x4 moveToCenter = TransformMakeTranslate(-mixPos.x, -mixPos.y, 0.f);
     matrix_float4x4 transformMatrix = TransformMake(transform);
     matrix_float4x4 transformOp = matrix_multiply(moveFromCenter, matrix_multiply(transformMatrix, moveToCenter));
-    matrix_float4x4 projectionMatrix = Orthographic(0, targetWidth, 0, targetHeight, -targetWidth, targetWidth);
+    float top = _renderTarget.texture.isFlipped ? 0 : targetHeight;
+    float bottom = _renderTarget.texture.isFlipped ? targetHeight : 0;
+    matrix_float4x4 projectionMatrix = Orthographic(0, targetWidth, bottom, top, -targetWidth, targetWidth);
     matrix_float4x4 m = matrix_multiply(projectionMatrix, transformOp);
     float mvpMatrix[16];
     GLIMatrixLoadFromColumns(mvpMatrix,
@@ -401,7 +403,9 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
     matrix_float4x4 moveToCenter = TransformMakeTranslate(-mixPos.x, -mixPos.y, 0.f);
     matrix_float4x4 transformMatrix = TransformMake(transform);
     matrix_float4x4 transformOp = matrix_multiply(moveFromCenter, matrix_multiply(transformMatrix, moveToCenter));
-    matrix_float4x4 projectionMatrix = Orthographic(0, targetWidth, 0, targetHeight, -targetWidth, targetWidth);
+    float top = _renderTarget.texture.isFlipped ? 0 : targetHeight;
+    float bottom = _renderTarget.texture.isFlipped ? targetHeight : 0;
+    matrix_float4x4 projectionMatrix = Orthographic(0, targetWidth, bottom, top, -targetWidth, targetWidth);
     matrix_float4x4 m = matrix_multiply(projectionMatrix, transformOp);
     float mvpMatrix[16];
     GLIMatrixLoadFromColumns(mvpMatrix,
@@ -466,7 +470,9 @@ matrix_float4x4 Orthographic(float left, float right, float bottom, float top, f
     float targetWidth = _renderTarget.width;
     float targetHeight = _renderTarget.height;
 
-    matrix_float4x4 m = Orthographic(0, targetWidth, 0, targetHeight, -targetWidth, targetWidth);
+    float top = _renderTarget.texture.isFlipped ? 0 : targetHeight;
+    float bottom = _renderTarget.texture.isFlipped ? targetHeight : 0;
+    matrix_float4x4 m = Orthographic(0, targetWidth, bottom, top, -targetWidth, targetWidth);
     float mvpMatrix[16];
     GLIMatrixLoadFromColumns(mvpMatrix,
                           m.columns[0].x, m.columns[1].x, m.columns[2].x, m.columns[3].x,
