@@ -39,6 +39,8 @@
 		DD5DEADB2595E624007781CB /* GLIViewRendererExampleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DD5DEAD82595E624007781CB /* GLIViewRendererExampleVC.m */; };
 		DD5DEADF2595E657007781CB /* GLIViewRendererExample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5DEADE2595E657007781CB /* GLIViewRendererExample.storyboard */; };
 		DD5DEAE32595E682007781CB /* GLIMixingMetalExample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5DEAE22595E682007781CB /* GLIMixingMetalExample.storyboard */; };
+		DD5FC9A525B0530800A791B5 /* GLIBaseShapeRendererTexQuad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5FC9A425B0530800A791B5 /* GLIBaseShapeRendererTexQuad.storyboard */; };
+		DD5FC9AA25B0535C00A791B5 /* GLIBaseShapeRendererTexQuadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DD5FC9A925B0535C00A791B5 /* GLIBaseShapeRendererTexQuadVC.m */; };
 		DDC76651247F987E00E08593 /* renderquad.metal in Sources */ = {isa = PBXBuildFile; fileRef = DDC76650247F987E00E08593 /* renderquad.metal */; };
 		DDE89E8222C20D0700E63AF3 /* GLITransformSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE89E8122C20D0700E63AF3 /* GLITransformSpec.m */; };
 /* End PBXBuildFile section */
@@ -99,6 +101,9 @@
 		DD5DEAD92595E624007781CB /* GLIViewRenderExampleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLIViewRenderExampleVC.h; sourceTree = "<group>"; };
 		DD5DEADE2595E657007781CB /* GLIViewRendererExample.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GLIViewRendererExample.storyboard; sourceTree = "<group>"; };
 		DD5DEAE22595E682007781CB /* GLIMixingMetalExample.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GLIMixingMetalExample.storyboard; sourceTree = "<group>"; };
+		DD5FC9A425B0530800A791B5 /* GLIBaseShapeRendererTexQuad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GLIBaseShapeRendererTexQuad.storyboard; sourceTree = "<group>"; };
+		DD5FC9A825B0535C00A791B5 /* GLIBaseShapeRendererTexQuadVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLIBaseShapeRendererTexQuadVC.h; sourceTree = "<group>"; };
+		DD5FC9A925B0535C00A791B5 /* GLIBaseShapeRendererTexQuadVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLIBaseShapeRendererTexQuadVC.m; sourceTree = "<group>"; };
 		DDC76650247F987E00E08593 /* renderquad.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = renderquad.metal; sourceTree = "<group>"; };
 		DDE89E8122C20D0700E63AF3 /* GLITransformSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLITransformSpec.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -259,6 +264,9 @@
 				DD5DEADE2595E657007781CB /* GLIViewRendererExample.storyboard */,
 				DD5DEAD92595E624007781CB /* GLIViewRenderExampleVC.h */,
 				DD5DEAD82595E624007781CB /* GLIViewRendererExampleVC.m */,
+				DD5FC9A425B0530800A791B5 /* GLIBaseShapeRendererTexQuad.storyboard */,
+				DD5FC9A825B0535C00A791B5 /* GLIBaseShapeRendererTexQuadVC.h */,
+				DD5FC9A925B0535C00A791B5 /* GLIBaseShapeRendererTexQuadVC.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -349,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD5FC9A525B0530800A791B5 /* GLIBaseShapeRendererTexQuad.storyboard in Resources */,
 				DD399A4322A131AC0010C534 /* USC-SIPI.4.2.07.tiff in Resources */,
 				DD5DEAE32595E682007781CB /* GLIMixingMetalExample.storyboard in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
@@ -430,6 +439,7 @@
 				6003F59E195388D20070C39A /* GLIAppDelegate.m in Sources */,
 				DD5DEADA2595E624007781CB /* GLIMixingMetalExampleVC.m in Sources */,
 				DDC76651247F987E00E08593 /* renderquad.metal in Sources */,
+				DD5FC9AA25B0535C00A791B5 /* GLIBaseShapeRendererTexQuadVC.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

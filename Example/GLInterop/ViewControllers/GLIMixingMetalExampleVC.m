@@ -178,7 +178,8 @@
         GLITexture *inputTextureInfo = GLITextureNew(CVOpenGLESTextureGetTarget(inputTexture),
                                                      CVOpenGLESTextureGetName(inputTexture),
                                                      width,
-                                                     height);
+                                                     height,
+                                                     CVOpenGLESTextureIsFlipped(inputTexture));
         
         // create an interoperable render target
         if (!_frameRenderTarget

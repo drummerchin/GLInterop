@@ -26,7 +26,6 @@
     __kindof GLIRenderer *_filter;
     
     GLIRenderTarget *_frameRenderTarget;
-
     dispatch_semaphore_t _frameLock;
 }
 
@@ -110,12 +109,15 @@
         @{@"name":@"UIViewContentModeBottomLeft", @"value":@(UIViewContentModeBottomLeft)},
         @{@"name":@"UIViewContentModeBottomRight", @"value":@(UIViewContentModeBottomRight)},
     ];
+    __weak typeof(self) weakSelf = self;
     for (int i = 0; i < contentModes.count; i++)
     {
         NSDictionary *item = contentModes[i];
         NSString *title = item[@"name"];
         UIViewContentMode value = [item[@"value"] unsignedIntegerValue];
+        
         UIAlertAction *contentModeAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            __strong typeof(self) self = weakSelf;
             if (self)
             {
                 self->_glView.contentMode = value;
@@ -125,6 +127,7 @@
         [menu addAction:contentModeAction];
     }
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        __strong typeof(self) self = weakSelf;
         if (self)
         {
             [menu dismissViewControllerAnimated:YES completion:nil];
@@ -209,14 +212,17 @@
     CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     size_t width = CVPixelBufferGetWidth(pixelBuffer);
     size_t height = CVPixelBufferGetHeight(pixelBuffer);
-
+    
     [_glContext runTaskWithHint:GLITaskHint_GenericTask block:^{
         // convert pixel buffer to GL texture
         CVOpenGLESTextureRef inputTexture = [_glTextureCache createCVTextureFromImage:pixelBuffer width:width height:height planeIndex:0];
         GLITexture *inputTextureInfo = GLITextureNew(CVOpenGLESTextureGetTarget(inputTexture),
                                                      CVOpenGLESTextureGetName(inputTexture),
                                                      width,
-                                                     height);
+                                                     height,
+                                                     CVOpenGLESTextureIsFlipped(inputTexture));
+        GLfloat bottomLeft[2], bottomRight[2], topLeft[2], topRight[2];
+        CVOpenGLESTextureGetCleanTexCoords(inputTexture, bottomLeft, bottomRight, topRight, topLeft);
         
         // create an interoperable render target
         if (!_frameRenderTarget
@@ -234,7 +240,7 @@
         
         // render texture to view
         _viewRenderer.inputTextures = @[_frameRenderTarget.texture];
-        [_viewRenderer renderToView:_glView isFlipped:YES];
+        [_viewRenderer renderToView:_glView];
 
         glFinish();
         CFRelease(inputTexture);

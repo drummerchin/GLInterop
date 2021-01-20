@@ -161,7 +161,7 @@
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
-    // present to drawable
+    // present drawable
     glBindRenderbuffer(GL_RENDERBUFFER, _renderbuffer);
     [context presentRenderbuffer:GL_RENDERBUFFER];
 }
