@@ -37,26 +37,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @abstract Render a quad with given texture to the render target, and specifies it's transform, anchor point and intensity.
+ @note The origin of the anchorPoint is the top-left corner.
  */
 - (void)renderQuadWithTexture:(id<GLITexture>)texture transform:(CATransform3D)transform anchorPoint:(CGPoint)anchorPoint intensity:(CGFloat)intensity;
 
 /*!
  @abstract Render a quad with given color to the render target, and specifies it's size, transform, anchor point and intensity.
+ @note The origin of the anchorPoint is the top-left corner.
  */
 - (void)renderQuadWithColor:(UIColor *)color size:(CGSize)size transform:(CATransform3D)transform anchorPoint:(CGPoint)anchorPoint intensity:(CGFloat)intensity;
 
 /*!
  @abstract Render points and specifies it's color and point size.
+ @note The origin of the points is the bottom-left corner.
 */
 - (void)renderPoint2D:(CGPoint *)points count:(NSUInteger)count color:(UIColor *)color pointSize:(CGFloat)pointSize intensity:(CGFloat)intensity;
 
 /*!
  @abstract Render line strip and specifies it's color and whether is closure.
+ @note The origin of the points is the bottom-left corner.
 */
 - (void)renderLineStrip2D:(CGPoint *)points count:(NSInteger)pointCount closePath:(BOOL)isClosure color:(UIColor *)color intensity:(CGFloat)intensity;
 
 /*!
  @abstract Render triangle strip with a given color.
+ @note The origin of the points is the bottom-left corner.
 */
 - (void)renderTriangleStrip2D:(CGPoint *)points count:(NSInteger)pointCount color:(UIColor *)color intensity:(CGFloat)intensity;
 
