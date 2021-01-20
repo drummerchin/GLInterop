@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  @method    sharedTextureCache
  @abstract  Returns a singleton instance that initialized from a shared context.
  */
-+ (instancetype)sharedTextureCache;
++ (instancetype)sharedTextureCache __deprecated;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
