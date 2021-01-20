@@ -22,12 +22,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/*!
+ @note For npot(non-power-of-two) dimensions texture, the only valid enum is ClampToEdge.
+ */
 typedef enum : NSUInteger {
     GLIAddressMode_ClampToEdge,
     GLIAddressMode_Repeat,
     GLIAddressMode_MirroredRepeat,
 } GLIAddressMode;
 
+/*!
+ @note For npot(non-power-of-two) dimensions texture, the valid enum is Linear and Nearest.
+ */
 typedef enum : NSUInteger {
     GLIMinFilter_Linear,
     GLIMinFilter_Nearest,
@@ -65,10 +71,12 @@ GLI_EXPORT NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionPremul
 GLI_EXPORT NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionNonPremultiplyFlipped(void);
 
 /// Synchronously load an image from URL into GLITexture.
-GLI_EXPORT id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
 
 /// Synchronously load an image form file path into GLITexture.
-GLI_EXPORT id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
 
 @interface GLITexture : NSObject <GLITexture, NSCopying>
 
