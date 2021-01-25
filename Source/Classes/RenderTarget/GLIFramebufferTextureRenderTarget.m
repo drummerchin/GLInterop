@@ -62,12 +62,15 @@
         _texture.width = self.width;
         _texture.height = self.height;
         
-        self.glTexture = _texture.name;
-
         [_texture setTextureParameters];
         [_texture setDimensions];
     }
     return self;
+}
+
+- (GLuint)glTexture
+{
+    return _texture.name;
 }
 
 - (void)prepareFramebuffer

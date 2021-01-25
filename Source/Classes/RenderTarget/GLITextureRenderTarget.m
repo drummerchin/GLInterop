@@ -20,6 +20,7 @@
     texture.name = self.glTexture;
     texture.width = self.width;
     texture.height = self.height;
+    texture.isFlipped = self.isFlipped;
     return texture;
 }
 

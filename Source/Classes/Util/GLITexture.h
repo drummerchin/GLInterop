@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreVideo/CoreVideo.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import <GLInterop/GLIBase.h>
 #import <OpenGLES/ES2/gl.h>
 
@@ -78,6 +79,14 @@ GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSD
 GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
 GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
 
+/// Synchronously load an image form data.
+GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromData(NSData *data, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromData(NSData *data, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
+
+/// Synchronously load an image form data.
+GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromCGImage(CGImageRef image, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromCGImage(CGImageRef image, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
+
 @interface GLITexture : NSObject <GLITexture, NSCopying>
 
 /*!
@@ -101,7 +110,7 @@ GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *
 @property (nonatomic) size_t height;
 
 /*!
- @abstract A boolean value that indicates wheather the content of texture is vertical flipped.
+ @abstract A boolean value that indicates whether the content of texture is vertical flipped.
  */
 @property (nonatomic) BOOL isFlipped;
 
