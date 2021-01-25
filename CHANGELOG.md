@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# [1.6.3] - 2021-01-25
+
 ### Added
 
 - Add `GLITextureLoadFromData()` and `GLITextureLoadFromCGImage()` texture loading functions.
