@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `GLITextureLoadFromData()` and `GLITextureLoadFromCGImage()` texture loading functions.
+
+### Changed
+
+- *GLITextureRenderTarget* now support flipped GL texture of render target.
+
+### Fixed
+
+- Fix issue that `glTexture` and `texture.name` of *GLIFramebufferTextureRenderTarget* not synchronized.
+
 # [1.6.2] - 2021-01-20
 
 ### Added
