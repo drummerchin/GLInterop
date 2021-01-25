@@ -121,8 +121,24 @@ GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<N
     GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfURL:URL options:options error:&error];
     if (error)
     {
+        // fix first time load failed bug
         textureInfo = [GLKTextureLoader textureWithContentsOfURL:URL options:options error:&error];
-        if (error)
+        
+        // fix image decode error bug
+        if (error.code == GLKTextureLoaderErrorDataPreprocessingFailure)
+        {
+            error = nil;
+            NSData *rawData = [NSData dataWithContentsOfURL:URL];
+            UIImage *uiImage = [UIImage imageWithData:rawData];
+            NSData *newData = UIImageJPEGRepresentation(uiImage, 1.0);
+            textureInfo = [GLKTextureLoader textureWithContentsOfData:newData options:options error:&error];
+            if (error)
+            {
+                if (outError) *outError = error;
+                return nil;
+            }
+        }
+        else
         {
             if (outError) *outError = error;
             return nil;
@@ -134,18 +150,8 @@ GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<N
 
 GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped)
 {
-    NSError *error = nil;
-    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfURL:URL options:options error:&error];
-    if (error)
-    {
-        textureInfo = [GLKTextureLoader textureWithContentsOfURL:URL options:options error:&error];
-        if (error)
-        {
-            if (outError) *outError = error;
-            return nil;
-        }
-    }
-    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height, isFlipped);
+    id<GLITexture> texture = GLITextureLoadFromURL(URL, options, outError);
+    return GLITextureNew(texture.target, texture.name, texture.width, texture.height, isFlipped);
 }
 
 GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
@@ -154,8 +160,24 @@ GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, N
     GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:&error];
     if (error)
     {
+        // fix first time load failed bug
         textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:&error];
-        if (error)
+        
+        // fix image decode error bug
+        if (error.code == GLKTextureLoaderErrorDataPreprocessingFailure)
+        {
+            error = nil;
+            NSData *rawData = [NSData dataWithContentsOfFile:filePath];
+            UIImage *uiImage = [UIImage imageWithData:rawData];
+            NSData *newData = UIImageJPEGRepresentation(uiImage, 1.0);
+            textureInfo = [GLKTextureLoader textureWithContentsOfData:newData options:options error:&error];
+            if (error)
+            {
+                if (outError) *outError = error;
+                return nil;
+            }
+        }
+        else
         {
             if (outError) *outError = error;
             return nil;
@@ -167,18 +189,79 @@ GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, N
 
 GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped)
 {
+    id<GLITexture> texture = GLITextureLoadFromFilePath(filePath, options, outError);
+    return GLITextureNew(texture.target, texture.name, texture.width, texture.height, isFlipped);
+}
+
+GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromData(NSData *data, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
+{
     NSError *error = nil;
-    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:&error];
+    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfData:data options:options error:&error];
     if (error)
     {
-        textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:&error];
-        if (error)
+        // fix image decode error bug
+        if (error.code == GLKTextureLoaderErrorDataPreprocessingFailure)
+        {
+            error = nil;
+            UIImage *uiImage = [UIImage imageWithData:data];
+            NSData *newData = UIImageJPEGRepresentation(uiImage, 1.0);
+            textureInfo = [GLKTextureLoader textureWithContentsOfData:newData options:options error:&error];
+            if (error)
+            {
+                if (outError) *outError = error;
+                return nil;
+            }
+        }
+        else
         {
             if (outError) *outError = error;
             return nil;
         }
     }
+    BOOL isFlipped = textureInfo.textureOrigin == GLKTextureInfoOriginTopLeft ? YES : NO;
     return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height, isFlipped);
+}
+
+GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromData(NSData *data, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped)
+{
+    id<GLITexture> texture = GLITextureLoadFromData(data, options, outError);
+    return GLITextureNew(texture.target, texture.name, texture.width, texture.height, isFlipped);
+}
+
+GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromCGImage(CGImageRef image, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError)
+{
+    NSError *error = nil;
+    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithCGImage:image options:options error:&error];
+    if (error)
+    {
+        // fix image decode error bug
+        if (error.code == GLKTextureLoaderErrorDataPreprocessingFailure)
+        {
+            error = nil;
+            UIImage *uiImage = [UIImage imageWithCGImage:image];
+            NSData *data = UIImageJPEGRepresentation(uiImage, 1.0);
+            uiImage = [UIImage imageWithData:data];
+            textureInfo = [GLKTextureLoader textureWithCGImage:uiImage.CGImage options:options error:&error];
+            if (error)
+            {
+                if (outError) *outError = error;
+                return nil;
+            }
+        }
+        else
+        {
+            if (outError) *outError = error;
+            return nil;
+        }
+    }
+    BOOL isFlipped = textureInfo.textureOrigin == GLKTextureInfoOriginTopLeft ? YES : NO;
+    return GLITextureNew(textureInfo.target, textureInfo.name, textureInfo.width, textureInfo.height, isFlipped);
+}
+
+GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromCGImage(CGImageRef image, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped)
+{
+    id<GLITexture> texture = GLITextureLoadFromCGImage(image, options, outError);
+    return GLITextureNew(texture.target, texture.name, texture.width, texture.height, isFlipped);
 }
 
 @implementation GLITexture
