@@ -27,6 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic) NSUInteger height;
 
+/*!
+ @abstract A boolean value that indicates whether the content of texture is vertical flipped.
+ */
+@property (nonatomic) BOOL isFlipped;
+
 @end
 
 NS_ASSUME_NONNULL_END
