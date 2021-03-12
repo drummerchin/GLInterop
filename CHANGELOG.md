@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.4] - 2021-03-12
+
 ### Fixed
 
 - Fix incorrect declarations of `GLITexture*` functions, use `GLI_EXTERN` instead of `GLI_EXPORT` to avoid can not find by C++.
