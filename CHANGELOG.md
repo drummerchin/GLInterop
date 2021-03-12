@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-# [1.6.3] - 2021-01-25
+### Fixed
+
+- Fix incorrect declarations of `GLITexture*` functions, use `GLI_EXTERN` instead of `GLI_EXPORT` to avoid can not find by C++.
+
+## [1.6.3] - 2021-01-25
 
 ### Added
 
@@ -21,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix issue that `glTexture` and `texture.name` of *GLIFramebufferTextureRenderTarget* not synchronized.
 
-# [1.6.2] - 2021-01-20
+## [1.6.2] - 2021-01-20
 
 ### Added
 
@@ -41,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix incorrect `isFlipped` property of `texture` in *GLIRenderTarget*.
 
-# [1.6.1] - 2021-01-12
+## [1.6.1] - 2021-01-12
 
 ### Changed
 
@@ -61,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Deprecate `renderToView:isFlipped:` of *GLIViewRenderer*, use `renderToView:` instead.
 
-# [1.6.0] - 2021-01-06
+## [1.6.0] - 2021-01-06
 
 ### Added
 
@@ -71,7 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Deprecate `deleteTextureWhileDeallocating` in *GLITexture* to adopt to the new management for GL objects.
 
-# [1.5.4] - 2021-01-05
+## [1.5.4] - 2021-01-05
 
 ### Added
 
@@ -82,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix incorrect blending mode of *GLIBaseShapeRenderer*.
 - Remove unneccessory disabling depth test of *GLIRenderer*.
 
-# [1.5.3] - 2020-12-29
+## [1.5.3] - 2020-12-29
 
 ### Changed
 
@@ -99,7 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix memory leak in *GLIBaseShapeRenderer*.
 - Fix missing texture filtering parameters setttings in *GLIBaseShapeRenderer* and *GLITransform*.
 
-# [1.5.2] - 2020-12-22
+## [1.5.2] - 2020-12-22
 
 ### GLIRenderer
 
@@ -110,7 +114,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update *GLIRenderer*, *GLITransform* and *GLIBaseShapeRenderer* to avoid using above deprecated API.
 
-# [1.5.1] - 2020-12-18
+## [1.5.1] - 2020-12-18
 
 ### Added
 
