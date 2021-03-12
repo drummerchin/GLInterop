@@ -52,40 +52,40 @@ typedef enum : NSUInteger {
 @class GLITexture;
 
 /// Convenience method to set texture filtering parameters using default value (linear/linear/clampToEdge/clampToEdge).
-GLI_EXPORT GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj);
+GLI_EXTERN GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj);
 
 /// Convenience method to set texture filtering parameters.
-GLI_EXPORT GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj, GLIMinFilter minFilter, GLIMagFilter magFilter, GLIAddressMode wrapS, GLIAddressMode wrapT);
+GLI_EXTERN GLI_OVERLOADABLE void GLITextureSetTexParameters(id<GLITexture> textureObj, GLIMinFilter minFilter, GLIMagFilter magFilter, GLIAddressMode wrapS, GLIAddressMode wrapT);
 
 /// Convenience method to create a GLITexture.
-GLI_EXPORT GLI_OVERLOADABLE GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height);
-GLI_EXPORT GLI_OVERLOADABLE GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height, BOOL flipped);
+GLI_EXTERN GLI_OVERLOADABLE GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height);
+GLI_EXTERN GLI_OVERLOADABLE GLITexture *GLITextureNew(GLenum target, GLuint name, size_t width, size_t height, BOOL flipped);
 
 /// Convenience method to create a texture 2d GLITexture.
-GLI_EXPORT GLI_OVERLOADABLE GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height);
-GLI_EXPORT GLI_OVERLOADABLE GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height, BOOL flipped);
+GLI_EXTERN GLI_OVERLOADABLE GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height);
+GLI_EXTERN GLI_OVERLOADABLE GLITexture *GLITextureNewTexture2D(GLuint name, size_t width, size_t height, BOOL flipped);
 
 /// New a dictionary with given options.
-GLI_EXPORT NSDictionary<NSString*, NSNumber*> *GLITextureLoadOptionNew(BOOL premultiplyAlpha, BOOL mipmap, BOOL bottomLeftOrigin, BOOL grayScaleAsAlpha, BOOL sRGB);
-GLI_EXPORT NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionPremultiply(void);
-GLI_EXPORT NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionPremultiplyFlipped(void);
-GLI_EXPORT NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionNonPremultiplyFlipped(void);
+GLI_EXTERN NSDictionary<NSString*, NSNumber*> *GLITextureLoadOptionNew(BOOL premultiplyAlpha, BOOL mipmap, BOOL bottomLeftOrigin, BOOL grayScaleAsAlpha, BOOL sRGB);
+GLI_EXTERN NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionPremultiply(void);
+GLI_EXTERN NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionPremultiplyFlipped(void);
+GLI_EXTERN NSDictionary<NSString*, NSNumber*> * const GLITextureLoadOptionNonPremultiplyFlipped(void);
 
 /// Synchronously load an image from URL into GLITexture.
-GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
-GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
+GLI_EXTERN GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXTERN GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromURL(NSURL *URL, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
 
 /// Synchronously load an image form file path into GLITexture.
-GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
-GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
+GLI_EXTERN GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXTERN GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromFilePath(NSString *filePath, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
 
 /// Synchronously load an image form data.
-GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromData(NSData *data, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
-GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromData(NSData *data, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
+GLI_EXTERN GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromData(NSData *data, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXTERN GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromData(NSData *data, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
 
 /// Synchronously load an image form data.
-GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromCGImage(CGImageRef image, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
-GLI_EXPORT GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromCGImage(CGImageRef image, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
+GLI_EXTERN GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromCGImage(CGImageRef image, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError);
+GLI_EXTERN GLI_OVERLOADABLE id<GLITexture> GLITextureLoadFromCGImage(CGImageRef image, NSDictionary<NSString*, NSNumber*> * __nullable options, NSError * __nullable * __nullable outError, BOOL isFlipped);
 
 @interface GLITexture : NSObject <GLITexture, NSCopying>
 
